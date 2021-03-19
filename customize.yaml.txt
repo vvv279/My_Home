@@ -1,0 +1,6 @@
+sensor.qbittorrent_down_speed:
+  icon: mdi:chevron-double-down
+sensor.qbittorrent_up_speed:
+  icon: mdi:chevron-double-up
+sensor.qbittorrent_status:
+  icon: mdi:swap-vertical

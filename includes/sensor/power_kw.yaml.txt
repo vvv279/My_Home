@@ -1,0 +1,137 @@
+#Сенсоры мощности
+  - platform: template
+    sensors:
+     telek_power:
+       value_template: "{{ state_attr('switch.telek', 'power') }}"
+       unit_of_measurement: "Вт"
+       entity_id: switch.telek
+       device_class: power
+       friendly_name: "Розетка Телек мощность"
+
+  - platform: template
+    sensors:
+     telek_voltage:
+       value_template: "{{ state_attr('switch.telek', 'voltage') }}"
+       unit_of_measurement: "V"
+       entity_id: switch.telek
+       device_class: power
+       friendly_name: "Напряжения в электрической сети"
+
+  - platform: template
+    sensors:
+     telek_amperage:
+       value_template: "{{ state_attr('switch.telek', 'amperage') }}"
+       unit_of_measurement: "A"
+       entity_id: switch.telek
+       device_class: power
+       friendly_name: "Ток в розетке Телек"
+# 
+  - platform: template
+    sensors:
+     sushka_power:
+       value_template: "{{ state_attr('switch.sushka', 'power') }}"
+       unit_of_measurement: "Вт"
+       entity_id: switch.sushka
+       device_class: power
+       friendly_name: "Розетка Сушка мощность"
+
+  - platform: template
+    sensors:
+     sushka_voltage:
+       value_template: "{{ state_attr('switch.sushka', 'voltage') }}"
+       unit_of_measurement: "V"
+       entity_id: switch.sushka
+       device_class: power
+       friendly_name: "Напряжения в электрической сети Сушка"
+
+  - platform: template
+    sensors:
+     sushka_amperage:
+       value_template: "{{ state_attr('switch.sushka', 'amperage') }}"
+       unit_of_measurement: "A"
+       entity_id: switch.sushka
+       device_class: power
+       friendly_name: "Ток в розетке Сушка "
+# 
+  - platform: template
+    sensors:
+     utiug_power:
+       value_template: "{{ state_attr('switch.utiug', 'power') }}"
+       unit_of_measurement: "Вт"
+       entity_id: switch.utiug
+       device_class: power
+       friendly_name: "Розетка Утюг мощность"
+
+  - platform: template
+    sensors:
+     utiug_voltage:
+       value_template: "{{ state_attr('switch.utiug', 'voltage') }}"
+       unit_of_measurement: "V"
+       entity_id: switch.utiug
+       device_class: power
+       friendly_name: "Напряжения в электрической сети Утюг"
+
+  - platform: template
+    sensors:
+     utiug_amperage:
+       value_template: "{{ state_attr('switch.utiug', 'amperage') }}"
+       unit_of_measurement: "A"
+       entity_id: switch.utiug
+       device_class: power
+       friendly_name: "Ток в розетке Утюг"
+# 
+  - platform: template
+    sensors:
+     server_power:
+       value_template: "{{ state_attr('switch.server', 'power') }}"
+       unit_of_measurement: "Вт"
+       entity_id: switch.server
+       device_class: power
+       friendly_name: "Розетка Сервер мощность"
+
+  - platform: template
+    sensors:
+     server_voltage:
+       value_template: "{{ state_attr('switch.server', 'voltage') }}"
+       unit_of_measurement: "V"
+       entity_id: switch.server
+       device_class: power
+       friendly_name: "Напряжения в электрической сети Сервер"
+
+  - platform: template
+    sensors:
+     server_amperage:
+       value_template: "{{ state_attr('switch.server', 'amperage') }}"
+       unit_of_measurement: "A"
+       entity_id: switch.server
+       device_class: power
+       friendly_name: "Ток в розетке Сервер"
+# 
+  - platform: template
+    sensors:
+     printer_power:
+       value_template: "{{ state_attr('switch.printer', 'power') }}"
+       unit_of_measurement: "Вт"
+       entity_id: switch.printer
+       device_class: power
+       friendly_name: "Розетка Принтер мощность"
+
+  - platform: template
+    sensors:
+     printer_voltage:
+       value_template: "{{ state_attr('switch.printer', 'voltage') }}"
+       unit_of_measurement: "V"
+       entity_id: switch.printer
+       device_class: power
+       friendly_name: "Напряжения в электрической сети Принтер"
+
+  - platform: template
+    sensors:
+     printer_amperage:
+       value_template: "{{ state_attr('switch.printer', 'amperage') }}"
+       unit_of_measurement: "A"
+       entity_id: switch.printer
+       device_class: power
+       friendly_name: "Ток в розетке Принтер"
+# 
+

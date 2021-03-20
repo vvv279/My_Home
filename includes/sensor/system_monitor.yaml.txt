@@ -1,0 +1,118 @@
+# System Monitor
+# https://www.home-assistant.io/integrations/systemmonitor/
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: processor_temperature
+      - type: ipv4_address
+        arg: wlan0
+      - type: processor_use
+      - type: last_boot
+      - type: disk_free
+        arg: /
+  - platform: version
+ 
+ # Время с последней перезагрузки
+  - platform: template
+    sensors:
+      last_boot_custom:
+        friendly_name: "Время непрерывной работы системы"
+        entity_id:
+          - sensor.time
+        value_template: >
+           {% set uptime = as_timestamp (now()) -as_timestamp(states.sensor.last_boot.state) | int %}
+           {% set minutes = (( uptime % 3600) / 60) | int %}
+           {% set hours = ((uptime % 86400) / 3600) | int %}
+           {% set days = (uptime / 86400) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+        icon_template: mdi:clock
+
+# Home Assistant в онлайне
+  - platform: uptime
+    name: online
+    unit_of_measurement: minutes        
+
+  - platform: template
+    sensors:
+       online_custom:
+        friendly_name: "Home Assistant в онлайне"
+        entity_id:
+          - sensor.time         
+        value_template: >
+           {% set uptime = as_timestamp (now()) -as_timestamp(states.sensor.online.state) | int %}
+           {% set minutes = (( uptime % 3600) / 60) | int %}
+           {% set hours = ((uptime % 86400) / 3600) | int %}
+           {% set days = (uptime / 86400) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+        icon_template: mdi:clock  
+
+############ Time & Date ############
+# https://www.home-assistant.io/integrations/time_date/
+  - platform: time_date
+    display_options:
+      - "time"  #Это время
+      - "date"  # Это ставим если нужен отдельно сенсор даты    
+      - "time_date"
+
+############
+#  - platform: sql
+#    db_url: mysql://hass:hass@core-mariadb/homeassistant?charset=utf8
+#    queries:
+#      - name: Maria DB size
+#        query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+#        column: 'value'
+#        unit_of_measurement: MB 
+
+# Датчик сохраняет метку времени (дату и время) последнего запуска Home Assistant.
+# https://www.home-assistant.io/integrations/uptime/
+  - platform: uptime
+    name: Time Online
+
+
+
+
+
+
+
+#        column: 'value'
+#        unit_of_measurement: MB 

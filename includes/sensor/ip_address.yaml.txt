@@ -1,0 +1,6 @@
+############# Внешний (Local) IP Address ###########
+# https://www.home-assistant.io/integrations/local_ip/
+  - platform: rest
+    resource: http://ip.jsontest.com
+    name: External IP
+    value_template: '{{ value_json.ip }}'

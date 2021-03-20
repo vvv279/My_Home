@@ -1,0 +1,372 @@
+- alias: Яндекс станция  получен текст
+  trigger:
+    platform: event
+    event_type: telegram_text
+  action:
+    service: media_player.play_media
+    entity_id: media_player.yandex_station_741078e2880c241e0350
+    data_template:
+      media_content_id: '{{ trigger.event.data.text }}'
+      media_content_type: question:{{ trigger.event.data.chat_id }}
+  id: 97c89c5a9c414e0d911fc21cab363ee4
+- alias: Яндекс станция  получен ответ
+  trigger:
+    platform: event
+    event_type: yandex_station_response
+  action:
+    service: telegram_bot.send_message
+    data_template:
+      target: '{{ trigger.event.data.request_id }}'
+      message: '{{ trigger.event.data.text }}'
+  id: 331f199b5fc24fb68feb10f9237d0d7e
+- id: '1611870434064'
+  alias: Зарядка устройства регистрирует подключение
+  description: ''
+  trigger:
+  - type: plugged_in
+    platform: device
+    device_id: 5e503fa95528c8925b2f6802966d4323
+    entity_id: binary_sensor.sm_g930f_zariadka_ustroistva
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 02ef18db81171f991aed1ba8891885a1
+    entity_id: switch.78007650dc4f22fbd5ca
+    domain: switch
+  mode: single
+- id: '1611870572782'
+  alias: Зарядка устройства регистрирует отключение
+  description: ''
+  trigger:
+  - type: not_plugged_in
+    platform: device
+    device_id: 5e503fa95528c8925b2f6802966d4323
+    entity_id: binary_sensor.sm_g930f_zariadka_ustroistva
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 02ef18db81171f991aed1ba8891885a1
+    entity_id: switch.78007650dc4f22fbd5ca
+    domain: switch
+  mode: single
+- id: '1612033042854'
+  alias: Сигналка
+  description: ''
+  trigger:
+  - type: plugged_in
+    platform: device
+    device_id: 5e503fa95528c8925b2f6802966d4323
+    entity_id: binary_sensor.sm_g930f_zariadka_ustroistva
+    domain: binary_sensor
+  condition: []
+  action:
+  - device_id: e43911f0a0c76ab3269927ea3963e9e4
+    domain: alarm_control_panel
+    entity_id: alarm_control_panel.alarmo
+    type: arm_home
+  mode: single
+- id: '1612211111244'
+  alias: Включить свет в прихожей, когда кто-то пришел (когда темно)
+  description: ''
+  trigger:
+  - platform: state
+    from: not_home
+    to: home
+    entity_id: person.vlad
+  - platform: state
+    entity_id: person.enia
+    from: not_home
+    to: home
+  condition:
+  - condition: or
+    conditions:
+    - condition: sun
+      after: sunset
+    - condition: sun
+      before: sunrise
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.sonoff_10010f2f6c
+  mode: single
+- id: '1612218908190'
+  alias: Яндекс
+  description: ''
+  use_blueprint:
+    path: haim-b/pause-media-player-on-a-calll.yaml
+    input:
+      phone_state: sensor.sm_g930f_sostoianie_telefona
+      person: media_player.yandex_station_741078e2880c241e0350
+- id: '1612289910183'
+  alias: Pause mediaplayer when calling1
+  description: ''
+  use_blueprint:
+    path: haim-b/pause-media-player-on-a-calll.yaml
+    input:
+      phone_state: sensor.sm_g930f_sostoianie_telefona
+      person: media_player.yandex_station_741078e2880c241e0350
+- id: '1612717510075'
+  alias: Выключить свет (розетки)когда кто то ушел+
+  description: по одному
+  trigger:
+  - platform: state
+    entity_id: person.vlad
+    to: not_home
+    from: home
+    for: 00:01:00
+  - platform: state
+    entity_id: person.enia
+    to: not_home
+    from: home
+    for: 00:01:00
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: group.sonoff
+  - service: switch.turn_off
+    data: {}
+    entity_id: group.rozetki
+  mode: single
+- id: 592857d52d5b4003bf9737048f37e8e1
+  alias: Hass Startup Notification
+  description: '#Уведомление о включении процесса'
+  trigger:
+  - platform: homeassistant
+    event: start
+  action:
+  - service: notify.notify
+    data:
+      title: '{{ ''🆗'' }} Системное уведомление'
+      message: '{{ ''🏁'' }} Cервер запущен в {{ states(''sensor.time'') }} {{ ''💻''
+        }}. Адрес сервера {{ states(''sensor.external_ip'') }}'
+  initial_state: 'on'
+  mode: single
+- alias: Home Assistant Stop - Notify
+  initial_state: 'on'
+  trigger:
+    platform: event
+    event_type: homeassistant_stop
+  action:
+  - service: notify.notify
+    data:
+      title: Home Assistant
+      message: '{{ ''❗️'' }} Сервер остановлен в {{ states(''sensor.time'') }} {{
+        ''❗️'' }}'
+  id: b4c04467305a42f4b5e10789903b5d59
+- alias: Login Failure
+  initial_state: 'on'
+  hide_entity: false
+  trigger:
+  - platform: state
+    entity_id: persistent_notification.http_login
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state != off }}'
+  action:
+  - service: notify.notify
+    data:
+      title: '{{ ''⚠️'' }} Системное уведомление {{ ''⚠️'' }}'
+      message: "{{ '\uD83D\uDCBB' }} Warning - Не удачная попытка подлючения. Не верно\
+        \ введен пароль. Всего попыток зафиксировано: {{ states('sensor.badlogin')\
+        \ }} {{ states.persistent_notification.http_login.attributes.message }}"
+      data:
+        push:
+          sound: wrong.mp3
+          badge: 0
+          category: hastop
+  - service: persistent_notification.dismiss
+    data:
+      notification_id: http_login
+  id: ed51e2e9ecf74376a8a439f811bbbe4c
+- id: New Device Connected
+  alias: New Device Connected
+  initial_state: 'on'
+  trigger:
+  - platform: event
+    event_type: device_tracker_new_device
+  action:
+  - service: notify.notify
+    data_template:
+      title: Системное уведомление
+      message: В сети появилось новое устройство
+- id: 1cfcc5a5aac84129b24133b6460f8e88
+  alias: Update Available Notifications
+  trigger:
+  - platform: state
+    entity_id: updater.updater
+    from: 'off'
+    to: 'on'
+  action:
+  - service: notify.notify
+    data:
+      title: Системное уведомление
+      message: '{{ "\ud83c\udf0d" }} Доступно новое обновление. Подробности на офциальном
+        сайте.'
+  initial_state: 'on'
+  mode: single
+- id: '1613241336060'
+  alias: Вова на работе (по зоне на карте)
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.redmi_note_4x
+    zone: zone.vova_rabota
+    event: enter
+  condition:
+  - condition: zone
+    entity_id: person.vova
+    zone: zone.vova_rabota
+  action:
+  - type: turn_on
+    device_id: 6eb00d11d01d8575f4ad4e315a771635
+    entity_id: switch.bf43f015b4c7804930t9ef
+    domain: switch
+  mode: single
+- id: '1613402985328'
+  alias: Светофор
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: device_tracker.sm_n985f
+    zone: zone.enia_rabota
+    event: enter
+  condition:
+  - condition: zone
+    entity_id: person.enia
+    zone: zone.enia_rabota
+  action:
+  - type: turn_on
+    device_id: 24df8d747df65c58d9e4745e96f42623
+    entity_id: switch.printer
+    domain: switch
+  mode: single
+- id: '1613929982332'
+  alias: Включить свет  (Дублировать)
+  description: ''
+  trigger:
+  - platform: state
+    from: not_home
+    to: home
+    entity_id: person.vlad
+  - platform: state
+    entity_id: person.admin
+    from: not_home
+    to: home
+  condition:
+  - condition: or
+    conditions:
+    - condition: sun
+      after: sunset
+    - condition: sun
+      before: sunrise
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: group.sonoff
+    entity_id: switch.sonoff_10010f2f6c
+  mode: single
+- id: '1613941192484'
+  alias: Выключить свет  group.family (group.sonoff(rozetki))
+  description: когда нет никого дома
+  trigger:
+  - platform: state
+    entity_id: group.family
+    from: home
+    to: not_home
+  condition: []
+  action:
+  - service: switch.turn_off
+    entity_id: group.sonoff
+  - service: switch.turn_off
+    data: {}
+    entity_id: group.rozetki
+  mode: single
+- id: '1613980645723'
+  alias: Включить свет  (Дублировать) (Дублировать)
+  description: ''
+  trigger:
+  - platform: state
+    from: not_home
+    to: home
+    entity_id: person.vlad
+  - platform: state
+    entity_id: person.admin
+    from: not_home
+    to: home
+  condition: []
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: group.sonoff
+    entity_id: switch.sonoff_10010f2f6c
+  mode: single
+- id: '1614103986303'
+  alias: Свет зал off то коридор on
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.sonoff_10010fb187
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.sonoff_10010f2f6c
+  mode: single
+- id: '1614104802357'
+  alias: Свет зал on то коридор off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.sonoff_10010fb187
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.sonoff_10010f2f6c
+  mode: single
+- id: '1614274448087'
+  alias: Выключить розетки  кто ушел
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: person.enia
+    from: home
+    to: not_home
+  - platform: state
+    entity_id: person.vlad
+    from: home
+    to: not_home
+  condition: []
+  action:
+  - type: turn_off
+    device_id: fb104664febc5552395ce9ef9257f6ec
+    entity_id: switch.bf0a9b974eb6b53022uofr
+    domain: switch
+  - type: turn_off
+    device_id: 6eb00d11d01d8575f4ad4e315a771635
+    entity_id: switch.bf43f015b4c7804930t9ef
+    domain: switch
+  mode: single
+- id: '1616084074397'
+  alias: 'Телек on то Свет спальне off '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: media_player.samsung_qe55q7fam
+    from: 'off'
+    to: 'on'
+    for: 00:00:30
+  condition: []
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id:
+      - switch.sonoff_10010eecd0
+  mode: single

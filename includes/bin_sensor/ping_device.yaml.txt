@@ -1,0 +1,67 @@
+########################### Configure binary_sensor ############################
+# Example configuration.yaml entry to ping host 192.168.1.X with 4 packets every 30 seconds.
+# https://www.home-assistant.io/integrations/binary_sensor/
+# https://www.home-assistant.io/integrations/ping/
+
+  - platform: ping
+    host: 192.168.1.1
+    name: "RT-AC68U"
+    count: 4
+    scan_interval: 120
+
+  - platform: ping
+    host: 192.168.1.2
+    name: "SERVER-PC"
+    count: 4
+    scan_interval: 120
+
+  - platform: ping
+    host: 192.168.1.100
+    name: "HP Printer"
+    count: 4
+    scan_interval: 120
+
+  - platform: ping
+    host: 192.168.1.96
+    name: "SAMSUNG-PC"
+    count: 4
+    scan_interval: 120
+
+  - platform: ping
+    host: 192.168.1.69
+    name: "ASUS-PC"
+    count: 4
+    scan_interval: 120
+
+  - platform: ping
+    host: 192.168.1.97
+    name: "Semik-PC"
+    count: 4
+    scan_interval: 120
+
+  - platform: ping
+    host: 192.168.1.114
+    name: "J2000"
+    count: 4
+    scan_interval: 900
+
+  - platform: ping
+    host: 192.168.1.44
+    name: "Yandex"
+    count: 4
+    scan_interval: 1800
+
+  - platform: ping
+    host: 176.96.3.171
+    name: "Keenetic Giga II"
+    count: 4
+    scan_interval: 1800
+
+  - platform: ping
+    host: vvv100.mykeenetic.ru
+    name: "Keenetic Giga II DDNS"
+    count: 4
+    scan_interval: 1800
+
+
+

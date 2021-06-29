@@ -59,7 +59,7 @@
  - [Mobile App](https://www.home-assistant.io/integrations/mobile_app)
  - [Shopping List](https://www.home-assistant.io/integrations/shopping_list)
  - [Certificate Expiry](https://www.home-assistant.io/integrations/cert_expiry)
-
-
+ - [Scheduler-component](https://github.com/nielsfaber/scheduler-component)
+ - [Sensor.yandex_maps](https://github.com/custom-components/sensor.yandex_maps)
 
 

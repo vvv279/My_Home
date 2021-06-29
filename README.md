@@ -16,6 +16,9 @@
  - Ubuntu Linux 20.04.2 LTS
  - Home Assistant
 
+**Sonoff Zigbee Devices:**
+ - 
+
 **Интеграции:**
 
  - [HACS](https://hacs.xyz/docs/installation/installation)

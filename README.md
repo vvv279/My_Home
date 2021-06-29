@@ -22,10 +22,11 @@
  - Sonoff ZB MINI
  - Aqara Vibration Sensor (DJT11LM, CR2032)
  - Aqara Temperature and Humidity Sensor (WSDCGQ11LM, CR2032)
+ - Xiaomi Mijia Smart Light Sensor (GZCGQ01LM, CR2450)
 
 **Bluetooth Devices:**
  - Xiaomi Door Sensor2 (MCCGQ02HL, 5.1 BLE, CR2032)
- - Xiaomi Mi Human body Sensor 2 (RTCQ02LM, 5.1 BLE, CR2450)
+ - Xiaomi Mijia Human body Sensor 2 (RTCQ02LM, 5.1 BLE, CR2450)
 
 **WiFi Devices:**
 

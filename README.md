@@ -18,7 +18,8 @@
 
 **Интеграции:**
 
- - HACS
+ - [HACS](https://hacs.xyz/docs/installation/installation)
  - Air Visual
+
 
 

@@ -15,3 +15,10 @@
 
  - Ubuntu Linux 20.04.2 LTS
  - Home Assistant
+
+**Интеграции:**
+
+ - HACS
+ - Air Visual
+
+

@@ -39,7 +39,7 @@
  - [Local IP Address](https://www.home-assistant.io/integrations/local_ip)
  - [Mobile App](https://www.home-assistant.io/integrations/mobile_app)
  - [Shopping List](https://www.home-assistant.io/integrations/shopping_list)
-
+ - [Certificate Expiry](https://www.home-assistant.io/integrations/cert_expiry)
 
 
 

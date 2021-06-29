@@ -65,6 +65,7 @@
  - [yandex_smart_home](https://github.com/dmitry-k/yandex_smart_home)
  - [SonoffLAN](https://github.com/AlexxIT/SonoffLAN)
 
+
  - [weather-card](https://github.com/bramkragten/weather-card)
  - [flex-table-card](https://github.com/custom-cards/flex-table-card)
  - [mini-graph-card](https://github.com/kalkih/mini-graph-card)
@@ -73,8 +74,16 @@
  - [scheduler-card](https://github.com/nielsfaber/scheduler-card)
  - [stack-in-card](https://github.com/custom-cards/stack-in-card)
  - [battery-state-card](https://github.com/maxwroc/battery-state-card)
-
-
+ - [hass-bha-icons](https://github.com/hulkhaugen/hass-bha-icons)
+ - [ha-lovelace-elapsed-time-card](https://github.com/kirbo/ha-lovelace-elapsed-time-card)
+ - [lovelace-tempometer-gauge-card](https://github.com/SNoof85/lovelace-tempometer-gauge-card)
+ - [air-visual-card](https://github.com/dnguyen800/air-visual-card)
+ - [ha-yandex-icons](https://github.com/iswitch/ha-yandex-icons)
+ - [simple-thermostat](https://github.com/nervetattoo/simple-thermostat)
+ - [vertical-stack-in-card](https://github.com/ofekashery/vertical-stack-in-card)
+ - [mini-humidifier](https://github.com/artem-sedykh/mini-humidifier)
+ - [lovelace-multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row)
+ - [logbook-card](https://github.com/royto/logbook-card)
 
 
 

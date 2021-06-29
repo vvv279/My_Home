@@ -16,6 +16,9 @@
  - Ubuntu Linux 20.04.2 LTS
  - Home Assistant
 
+**Hub Devices:**
+ - Mi Smart Home Hub (ZNDMWG02LM, Zigbee 3.0/Bluetooth (BLE Mesh) 5.0/Wi-Fi 2.4GHz)
+
 **Zigbee Devices:**
  - Sonoff SNZB-02 (CR2032)
  - Sonoff SNZB-04 (CR2032)

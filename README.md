@@ -20,15 +20,15 @@
  - Sonoff SNZB-02 (CR2032)
  - Sonoff SNZB-04 (CR2032)
  - Sonoff ZB MINI
- - 
+ - Aqara Vibration Sensor (DJT11LM, CR2032)
+ - Aqara Temperature and Humidity Sensor (WSDCGQ11LM, CR2032)
 
 **Bluetooth Devices:**
  - Xiaomi Door Sensor2 (MCCGQ02HL, 5.1 BLE, CR2032)
  - Xiaomi Mi Human body Sensor 2 (RTCQ02LM, 5.1 BLE, CR2450)
 
 **WiFi Devices:**
- - Aqara Vibration Sensor (DJT11LM, CR2032)
- - Aqara Temperature and Humidity Sensor (WSDCGQ11LM, CR2032)
+
 
 
 **Интеграции:**

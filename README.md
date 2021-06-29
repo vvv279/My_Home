@@ -22,6 +22,14 @@
  - Sonoff ZB MINI
  - 
 
+**Bluetooth Devices:**
+ - Xiaomi Door Sensor2
+ - Xiaomi Mi 2
+
+**WiFi Devices:**
+ - Aqara Vibration Sensor
+
+
 **Интеграции:**
 
  - [HACS](https://hacs.xyz/docs/installation/installation)

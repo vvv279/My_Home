@@ -27,7 +27,7 @@
  - Xiaomi Mi Human body Sensor 2 (RTCQ02LM, 5.1 BLE, CR2450)
 
 **WiFi Devices:**
- - Aqara Vibration Sensor
+ - Aqara Vibration Sensor(DJT11LM, CR2032)
 
 
 **Интеграции:**

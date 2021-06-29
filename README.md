@@ -16,7 +16,10 @@
  - Ubuntu Linux 20.04.2 LTS
  - Home Assistant
 
-**Sonoff Zigbee Devices:**
+**Zigbee Devices:**
+ - Sonoff SNZB-02
+ - Sonoff SNZB-04
+ - Sonoff ZB MINI
  - 
 
 **Интеграции:**

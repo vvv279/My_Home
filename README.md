@@ -32,7 +32,7 @@
  - Xiaomi Mijia Human body Sensor 2 (RTCQ02LM, 5.1 BLE, CR2450)
 
 **WiFi Devices:**
-
+ - Sonoff MINI DIY WiFi
 
 
 **Интеграции:**

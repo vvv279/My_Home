@@ -19,7 +19,28 @@
 **Интеграции:**
 
  - [HACS](https://hacs.xyz/docs/installation/installation)
- - Air Visual
+ - [AirVisual Cloud API](https://www.home-assistant.io/integrations/airvisual)
+ - [Alarmo](https://github.com/nielsfaber/alarmo)
+ - [Google Cast](https://www.home-assistant.io/integrations/cast)
+ - [Meteorologisk institutt (Met.no)](https://www.home-assistant.io/integrations/met)
+ - [MQTT](https://www.home-assistant.io/integrations/mqtt)
+ - [Network UPS Tools (NUT)](https://www.home-assistant.io/integrations/nut)
+ - [OpenWeatherMap](https://www.home-assistant.io/integrations/openweathermap)
+ - [Plex Media Server](https://www.home-assistant.io/integrations/plex)
+ - [Samsung Smart TV](https://www.home-assistant.io/integrations/samsungtv)
+ - [scheduler-component](https://github.com/nielsfaber/scheduler-component)
+ - [Speedtest.net](https://www.home-assistant.io/integrations/speedtestdotnet)
+ - [StartTime](https://github.com/AlexxIT/StartTime)
+ - [UPnP/IGD](https://www.home-assistant.io/integrations/upnp)
+ - [Xiaomi Gateway 3](https://github.com/AlexxIT/XiaomiGateway3)
+ - [YandexStation](https://github.com/AlexxIT/YandexStation)
+ - [Zigbee Home Automation](https://www.home-assistant.io/integrations/zha)
+ - [hass-lkcomu-interrao (ЕЛК ЖКХ «Интер РАО»)](https://github.com/alryaz/hass-lkcomu-interrao)
+ - [Local IP Address](https://www.home-assistant.io/integrations/local_ip)
+ - [Mobile App](https://www.home-assistant.io/integrations/mobile_app)
+ - [Shopping List](https://www.home-assistant.io/integrations/shopping_list)
+
+
 
 
 

@@ -24,7 +24,7 @@
 
 **Bluetooth Devices:**
  - Xiaomi Door Sensor2 (MCCGQ02HL, 5.1 BLE, CR2032)
- - Xiaomi Mi 2 (RTCQ02LM, 5.1 BLE, CR2450)
+ - Xiaomi Mi Human body Sensor 2 (RTCQ02LM, 5.1 BLE, CR2450)
 
 **WiFi Devices:**
  - Aqara Vibration Sensor

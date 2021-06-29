@@ -61,5 +61,21 @@
  - [Certificate Expiry](https://www.home-assistant.io/integrations/cert_expiry)
  - [Scheduler-component](https://github.com/nielsfaber/scheduler-component)
  - [Sensor.yandex_maps](https://github.com/custom-components/sensor.yandex_maps)
+ - [irrigation_unlimited](https://github.com/rgc99/irrigation_unlimited)
+ - [yandex_smart_home](https://github.com/dmitry-k/yandex_smart_home)
+ - [SonoffLAN](https://github.com/AlexxIT/SonoffLAN)
+
+ - [weather-card](https://github.com/bramkragten/weather-card)
+ - [flex-table-card](https://github.com/custom-cards/flex-table-card)
+ - [mini-graph-card](https://github.com/kalkih/mini-graph-card)
+ - [lovelace-auto-entities](https://github.com/thomasloven/lovelace-auto-entities)
+ - [mini-media-player](https://github.com/kalkih/mini-media-player)
+ - [scheduler-card](https://github.com/nielsfaber/scheduler-card)
+ - [stack-in-card](https://github.com/custom-cards/stack-in-card)
+ - [battery-state-card](https://github.com/maxwroc/battery-state-card)
+
+
+
+
 
 

@@ -1,0 +1,103 @@
+# /.homeassistant/includes/sensors/sonoff_power_wifi.yaml
+
+################################################################################
+# сигнал WiFi
+################################################################################
+# ------------ Свет в коридоре
+  - platform: template
+    sensors:
+     power_wifi_sonoff_10010f2f6c:
+       value_template: "{{ state_attr('switch.sonoff_10010f2f6c', 'rssi') }}"
+       unit_of_measurement: "dBm"
+#       entity_id: switch.sonoff_10010f2f6c
+       device_class: signal_strength
+       friendly_name: "Розетка в коридоре зарядка сигнал WiFi"
+#       friendly_name: "Свет в коридоре сигнал WiFi"
+# ------------ Свет в зале
+  - platform: template
+    sensors:
+     power_wifi_sonoff_10010fb187:
+       value_template: "{{ state_attr('switch.sonoff_10010fb187', 'rssi') }}"
+       unit_of_measurement: "dBm"
+#       entity_id: switch.sonoff_10010fb187
+       device_class: signal_strength
+       friendly_name: "Свет в зале сигнал WiFi"
+# ------------ Свет в спальне
+  - platform: template
+    sensors:
+     power_wifi_sonoff_10010eecd0:
+       value_template: "{{ state_attr('switch.sonoff_10010eecd0', 'rssi') }}"
+       unit_of_measurement: "dBm"
+#       entity_id: switch.sonoff_10010eecd0
+       device_class: signal_strength
+       friendly_name: "Свет в спальне сигнал WiFi"
+# ------------ Свет в кухне
+  - platform: template
+    sensors:
+     power_wifi_sonoff_10010e877e:
+       value_template: "{{ state_attr('switch.sonoff_10010e877e', 'rssi') }}"
+       unit_of_measurement: "dBm"
+#       entity_id: switch.sonoff_10010e877e
+       device_class: signal_strength
+       friendly_name: "Свет в кухне сигнал WiFi"
+# ------------ Свет в ванной
+  - platform: template
+    sensors:
+     power_wifi_sonoff_10010f89a2:
+       value_template: "{{ state_attr('switch.sonoff_10010f89a2', 'rssi') }}"
+       unit_of_measurement: "dBm"
+#       entity_id: switch.sonoff_10010f89a2
+       device_class: signal_strength
+       friendly_name: "Свет в ванной сигнал WiFi"
+
+# ------------ Sonoff zigbee hub
+  - platform: template
+    sensors:
+     power_wifi_sonoff_10011a1886:
+       value_template: "{{ state_attr('switch.sonoff_10011a1886', 'rssi') }}"
+       unit_of_measurement: "dBm"
+       device_class: signal_strength
+       friendly_name: "Sonoff zigbee hub сигнал WiFi"
+
+# ------------ Sonoff Home Assistant
+  - platform: template
+    sensors:
+     power_wifi_pc_100121558b:
+       value_template: "{{ state_attr('switch.pc_100121558b', 'rssi') }}"
+       unit_of_measurement: "dBm"
+       device_class: signal_strength
+       friendly_name: "Sonoff Home Assistant сигнал WiFi"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

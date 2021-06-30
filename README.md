@@ -84,7 +84,7 @@
  - [mini-humidifier](https://github.com/artem-sedykh/mini-humidifier)
  - [lovelace-multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row)
  - [logbook-card](https://github.com/royto/logbook-card)
-
+ - [PythonScriptsPro](https://github.com/AlexxIT/PythonScriptsPro)
 
 
 

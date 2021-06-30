@@ -1,0 +1,92 @@
+# /.homeassistant/includes/packages/device/filter_voda_counter.yaml
+
+
+filter_voda_counter:
+  
+  counter:
+  #Счетчик дли фильтра
+    filter_counter:
+      initial: 0
+      step: 1
+      
+  input_number:
+    filter_life:
+      name: 'Filter life'
+      max: 60
+      min: 30
+      step: 15
+      
+  input_boolean:
+    filter_count:
+      name: Вести подсчёт
+      
+  automation:
+# Подсчет времени работы фильтра
+  - alias: "count_filter_life"
+    trigger:
+      platform: time
+      at: "08:00:10"
+    condition:
+      condition: state
+      entity_id: input_boolean.filter_count
+      state: 'on'
+    action:
+      - service: counter.increment
+        entity_id: counter.filter_counter
+        
+# Уведомление, когда Фильтр для воды скоро закончится (за неделю)
+  - alias: "notify_filter_life_end_7_days"
+    trigger: 
+      platform: state
+      entity_id: sensor.filters_day_expect
+      to: "7"
+    action:
+      - service: shopping_list.add_item
+        data:
+          name: "Фильтр для воды Барьер"
+      - service: notify.telegram_id_1
+        data:
+          message: "Фильтр для воды Барьер скоро закончится, Фильтр добавлен в список покупок"
+      - service: notify.telegram_id_3
+        data:
+          message: "Фильтр для воды Барьер скоро закончится, Фильтр добавлен в список покупок"
+      - service: script.turn_on
+        entity_id: script.update_shopping_list
+
+# Уведомление, когда Фильтр пора менять 
+  - alias: "notify_filter_life_end"
+    trigger: 
+      platform: state
+      entity_id: sensor.filters_day_expect
+      to: "1"
+    action:
+      - service: notify.telegram_id_1
+        data:
+          message: "Замените фильтр для воды Барьер"
+      - service: notify.telegram_id_3
+        data:
+          message: "Замените фильтр для воды Барьер"
+        
+# Скрипт для ручного сброса счетчика, после замены фильтра.
+  script:
+    filter_counter_reset:
+      alias: filter counter reset
+      sequence:
+        - service: counter.reset
+          entity_id: counter.filter_counter
+          
+  sensor:
+# Сенсор, на сколько дней еще хватит
+  - platform: template
+    sensors:
+      filters_day_expect:
+        friendly_name: "Осталось дней до замены фмльтра"
+        value_template: "{{ (states('input_number.filter_life') | int - (states('counter.filter_counter') | int ) | round(0)) }}"
+        icon_template: mdi:clock-outline
+
+# Сенсор, сколько дней уже проработал
+      filters_day_work:
+        friendly_name: "Проработал дней"
+        value_template: "{{ (states('counter.filter_counter') | int ) | round(0) }}"
+        icon_template: mdi:clock-outline
+      

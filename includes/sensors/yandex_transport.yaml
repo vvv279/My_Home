@@ -1,4 +1,4 @@
-# /.homeassistant/includes/sensor/yandex_transport.yaml
+# /.homeassistant/includes/sensors/yandex_transport.yaml
 # https://www.home-assistant.io/integrations/yandex_transport/
 
   - platform: yandex_transport

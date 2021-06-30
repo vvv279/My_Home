@@ -1,0 +1,208 @@
+# /.homeassistant/includes/sensors/sensor.yaml
+
+
+################################################################################
+# Pressure
+################################################################################
+# /.homeassistant/includes/bin_sensor/bi_sensor.yaml
+# /.homeassistant/includes/template/sensor/weather.yaml
+
+
+  - platform: statistics
+
+    entity_id: sensor.agara_t_zal_pressure_mmhg # sensor.pressure_average
+    name: pressure
+    max_age:
+      minutes: 30
+      
+  - platform: statistics
+    entity_id: sensor.agara_t_zal_pressure_mmhg # sensor.pressure_average
+    name: pressure_stats_3h
+    max_age:
+      hours: 3
+    sampling_size: 10800
+
+  - platform: statistics
+    entity_id: sensor.agara_t_zal_pressure_mmhg # sensor.pressure_average
+    name: pressure_stats_6h
+    max_age:
+      hours: 6
+    sampling_size: 21600
+
+
+################################################################################
+# 
+################################################################################
+
+# -------------------- https://tesis.lebedev.ru/magnetic_storms.html
+  - platform: scrape
+    name: Magnetic Storm
+    resource: https://tesis.lebedev.ru/magnetic_storms.html
+    select: table.main td p:nth-of-type(4) > b
+    unit_of_measurement: ' '
+    value_template: "{{ value.split('(')[0] | int }}"
+    scan_interval: 300
+
+
+################################################################################
+# 
+################################################################################
+# -------------------- https://www.home-assistant.io/integrations/waqi/#token
+  - platform: waqi
+    token: !secret aqicn_api_key
+    scan_interval: 900
+    locations:
+      - Ostankino, Moscow
+#      - beijing
+
+
+################################################################################
+# Moon & Sun
+################################################################################
+# https://www.home-assistant.io/integrations/moon/
+
+  - platform: moon
+
+# /.homeassistant/includes/packages/telegram/sun_rises_telegram.yaml
+#  ---- Полнолуние
+
+
+  - platform: template
+    sensors:
+      sun_sun_elevation:
+#        friendly_name_template: "{{ states.sun.sun.name}} Солнечная высота"
+        value_template: '{{ state_attr("sun.sun","elevation") | float }} '
+#        unit_of_measurement: 'Солнечная высота'
+
+  - platform: template
+    sensors:
+      sun_sun_azimuth:
+#        friendly_name_template: "{{ states.sun.sun.name}} Солнечный азимут"
+        value_template: '{{ state_attr("sun.sun","azimuth") | float }} '
+#        unit_of_measurement: 'Солнечный азимут'
+
+
+  - platform: template
+    sensors:
+      sun_sun_rising:
+#        friendly_name_template: "{{ states.sun.sun.name}} Верно, если Солнце в настоящее время восходит, после солнечной полуночи и до солнечного полудня"
+        value_template: '{{ state_attr("sun.sun","rising") }} '
+#        unit_of_measurement: 'Верно, если Солнце в настоящее время восходит, после солнечной полуночи и до солнечного полудня'
+
+  - platform: template
+    sensors:
+      sun_sun_next_rising:
+#        friendly_name_template: "{{ states.sun.sun.name}} Дата и время следующего восхода солнца (в UTC)"
+        value_template: '{{ state_attr("sun.sun","next_rising") }} '
+#        unit_of_measurement: 'Дата и время следующего восхода солнца (в UTC)'
+
+  - platform: template
+    sensors:
+      sun_sun_next_setting:
+#        friendly_name_template: "{{ states.sun.sun.name}} Дата и время следующего захода солнца (по UTC)"
+        value_template: '{{ state_attr("sun.sun","next_setting") }} '
+#        unit_of_measurement: 'Дата и время следующего захода солнца (по UTC)'
+
+  - platform: template
+    sensors:
+      sun_sun_next_dawn:
+#        friendly_name_template: "{{ states.sun.sun.name}} Дата и время следующего рассвета (в UTC)"
+        value_template: '{{ state_attr("sun.sun","next_dawn") }} '
+#        unit_of_measurement: 'Дата и время следующего рассвета (в UTC)'
+
+  - platform: template
+    sensors:
+      sun_sun_next_dusk:
+#        friendly_name_template: "{{ states.sun.sun.name}} Дата и время следующего наступления сумерек (по UTC)"
+        value_template: '{{ state_attr("sun.sun","next_dusk") }} '
+#        unit_of_measurement: 'Дата и время следующего наступления сумерек (по UTC)'
+
+  - platform: template
+    sensors:
+      sun_sun_next_noon:
+#        friendly_name_template: "{{ states.sun.sun.name}} Дата и время следующего солнечного полудня (по UTC)"
+        value_template: '{{ state_attr("sun.sun","next_noon") }} '
+#        unit_of_measurement: 'Дата и время следующего солнечного полудня (по UTC)'
+
+  - platform: template
+    sensors:
+      sun_sun_next_midnight:
+#        friendly_name_template: "{{ states.sun.sun.name}} Дата и время следующей солнечной полуночи (в UTC)"
+        value_template: '{{ state_attr("sun.sun","next_midnight") }} '
+#        unit_of_measurement: 'Дата и время следующей солнечной полуночи (в UTC)'
+
+################################################################################
+# Time & Date
+################################################################################
+  - platform: template
+    sensors:
+      date_formatted:
+        friendly_name: 'Date (DD.MM.YYYY)'
+        value_template: "{{ as_timestamp(states('sensor.date')) | timestamp_custom('%d.%m.%Y') }}"  
+        icon_template: mdi:calendar
+        attribute_templates:
+          day_of_week: >-
+            {% set day_num = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"] %}
+            {% set day_of_week = day_num[now().weekday()] %}
+            {{ day_of_week }}
+
+  - platform: template
+    sensors:
+      date_formatted_nedelay:
+        friendly_name: 'Day'
+        value_template: "{{ state_attr('sensor.date_formatted', 'day_of_week') }}"  
+        icon_template: mdi:calendar
+#        unit_of_measurement: 'ДН'
+#        entity_id: sensor.date_formatted
+
+
+# https://www.home-assistant.io/integrations/time_date/
+  - platform: time_date
+    display_options:
+      - "time"  #Это время
+      - "date"  # Это ставим если нужен отдельно сенсор даты    
+      - "time_date"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

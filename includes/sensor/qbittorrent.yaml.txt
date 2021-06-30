@@ -1,6 +1,0 @@
-# qBittorrent
-# https://www.home-assistant.io/integrations/qbittorrent/
-  - platform: qbittorrent
-    url: http://192.168.1.2:8060
-    username: !secret qbittorrent_username
-    password: !secret qbittorrent_password

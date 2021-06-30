@@ -1,7 +1,0 @@
-# Yandex Transport
-# https://www.home-assistant.io/integrations/yandex_transport/
-
-  - platform: yandex_transport
-    stop_id: !secret yandex_transport_stop_id
-    routes:
-      - т72

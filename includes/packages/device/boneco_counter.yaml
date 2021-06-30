@@ -1,0 +1,114 @@
+# /.homeassistant/includes/packages/device/boneco_counter.yaml
+
+
+################################################################################
+# 
+################################################################################
+boneco_counter:
+
+################################################################################
+# 
+################################################################################
+  counter:
+  #Счетчик дли Бонеко
+    boneco_counter:
+      initial: 0
+      step: 1
+
+################################################################################
+# 
+################################################################################
+  input_number:
+    boneco_life:
+      name: 'Filter life'
+      max: 14
+      min: 7
+      step: 7
+
+################################################################################
+# 
+################################################################################
+  input_boolean:
+    boneco_count:
+      name: Вести подсчёт
+
+################################################################################
+# 
+################################################################################
+  automation:
+# Подсчет времени работы Бонеко
+  - alias: "count_boneco_life"
+    trigger:
+      platform: time
+      at: "08:00:20"
+    condition:
+      condition: state
+      entity_id: input_boolean.boneco_count
+      state: 'on'
+    action:
+      - service: counter.increment
+        entity_id: counter.boneco_counter
+        
+# Уведомление, когда мыть (за неделю)
+  - alias: "notify_boneco_life_end_7_days"
+    trigger: 
+      platform: state
+      entity_id: sensor.boneco_day_expect
+      to: "1"
+    action:
+      - service: shopping_list.add_item
+        data:
+          name: "Помыть Бонеко"
+      - service: notify.telegram_id_1
+        data:
+          message: "Бонеко скоро мыть, Бонеко добавлен в список покупок"
+      - service: notify.telegram_id_3
+        data:
+          message: "Бонеко скоро мыть, Бонеко добавлен в список покупок"
+#      - service: script.turn_on
+#        entity_id: script.update_shopping_list
+
+# Уведомление, когда Фильтр пора менять 
+  - alias: "notify_boneco_life_end"
+    trigger: 
+      platform: state
+      entity_id: sensor.boneco_day_expect
+      to: "0"
+    action:
+      - service: notify.telegram_id_1
+        data:
+          message: "Помыть Бонеко"
+      - service: notify.telegram_id_3
+        data:
+          message: "Помыть Бонеко"
+
+################################################################################
+# 
+################################################################################
+# Скрипт для ручного сброса счетчика, после замены фильтра.
+  script:
+    boneco_counter_reset:
+      alias: boneco counter reset
+      sequence:
+        - service: counter.reset
+          entity_id: counter.boneco_counter
+
+################################################################################
+# 
+################################################################################
+  sensor:
+# Сенсор, на сколько дней еще хватит
+  - platform: template
+    sensors:
+      boneco_day_expect:
+        friendly_name: "Осталось дней до помывки Бонеко"
+        value_template: "{{ (states('input_number.boneco_life') | int - (states('counter.boneco_counter') | int ) | round(0)) }}"
+        icon_template: mdi:clock-outline
+
+# Сенсор, сколько дней уже проработал
+      boneco_day_work:
+        friendly_name: "Проработал дней"
+        value_template: "{{ (states('counter.boneco_counter') | int ) | round(0) }}"
+        icon_template: mdi:clock-outline
+      
+

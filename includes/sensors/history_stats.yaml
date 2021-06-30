@@ -1,0 +1,601 @@
+# /.homeassistant/includes/sensors/history_stats.yaml
+# https://www.home-assistant.io/integrations/history_stats/
+
+
+
+################################################################################
+# 
+################################################################################
+  - platform: history_stats
+    name: samsung_tv_qe55q7fam_history_stats
+    entity_id: media_player.samsung_qe55q7fam
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+################################################################################
+# 
+################################################################################
+  - platform: template
+    sensors:
+       samsung_tv_qe55q7fam_custom:
+         friendly_name: "Телевизор Samsung 55fam работал сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.samsung_tv_qe55q7fam_history_stats.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+#
+
+
+
+
+  - platform: history_stats
+    name: svet_koridor_sonoff_10010f2f6c
+    entity_id: light.sonoff_a48001350d
+    state: "on"
+    type: time
+
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       svet_koridor_custom:
+         friendly_name: "Свет в коридоре работал сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.svet_koridor_sonoff_10010f2f6c.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: svet_zal_sonoff_10010fb187
+    entity_id: switch.sonoff_10010fb187
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       svet_zal_custom:
+         friendly_name: "Свет в зале работал сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.svet_zal_sonoff_10010fb187.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: svet_spalnya_sonoff_10010eecd0
+    entity_id: switch.sonoff_10010eecd0
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       svet_spalnya_custom:
+         friendly_name: "Свет в спальне работал сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.svet_spalnya_sonoff_10010eecd0.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: svet_kuhnya_sonoff_10010e877e
+    entity_id: switch.sonoff_10010e877e
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       svet_kuhnya_custom:
+         friendly_name: "Свет в кухне работал сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.svet_kuhnya_sonoff_10010e877e.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: svet_vannaya_sonoff_10010f89a2
+    entity_id: switch.sonoff_10010f89a2
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       svet_vannaya_custom:
+         friendly_name: "Свет в ванной работал сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.svet_vannaya_sonoff_10010f89a2.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: rozetka_printer
+    entity_id: switch.printer
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       rozetka_printer_custom:
+         friendly_name: "Розетка принтер работала сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.rozetka_printer.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+  - platform: template
+    sensors:
+      last_rozetka_printer_custom:
+        friendly_name: "Розетка принтер непрерывной работы"
+#        entity_id:
+#          - sensor.time
+        value_template: >
+           {% set uptime = as_timestamp (now()) -as_timestamp(states.sensor.rozetka_printer.state) | int %}
+           {% set minutes = (( uptime % 3600) / 60) | int %}
+           {% set hours = ((uptime % 86400) / 3600) | int %}
+           {% set days = (uptime / 86400000) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+        icon_template: mdi:clock
+#################################################################################
+      last_rozetka_printer_custom_custom:
+         friendly_name: "Розетка принтер непрерывной работы"
+         value_template: >
+           {% set uptime = as_timestamp (now()) -as_timestamp(states('sensor.rozetka_printer')) | int %}
+           {% set minutes = (( uptime % 3600) / 60) | int %}
+           {% set hours = ((uptime % 86400) / 3600) | int %}
+           {% set days = (uptime / 86400) | int %}
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+
+
+################################################################################
+  - platform: history_stats
+    name: rozetka_server
+    entity_id: switch.server
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       rozetka_server_custom:
+         friendly_name: "Розетка сервер работала сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.rozetka_server.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+
+  - platform: history_stats
+    name: rozetka_sushka
+    entity_id: switch.sushka
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       rozetka_sushka_custom:
+         friendly_name: "Розетка сушка работала сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.rozetka_sushka.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: rozetka_utiug
+    entity_id: switch.utiug
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       rozetka_utiug_custom:
+         friendly_name: "Розетка утюг работала сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.rozetka_utiug.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: rozetka_telek
+    entity_id: switch.telek
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       rozetka_telek_custom:
+         friendly_name: "Розетка телек работала сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.rozetka_telek.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+
+  - platform: history_stats
+    name: rozetka_ventiliator
+    entity_id: switch.ventiliator
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       rozetka_ventiliator_custom:
+         friendly_name: "Розетка вентилятор работала сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.rozetka_ventiliator.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+  - platform: history_stats
+    name: rozetka_zaryad_pilisosa
+    entity_id: switch.sonoff_10010f2f6c
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+       rozetka_ventiliator_custom:
+         friendly_name: "Розетка заряд пылисоса работала сегодня"
+         value_template: >
+           {% set uptime = (states.sensor.rozetka_ventiliator.state | float * 60) %}
+           {% set minutes = ( uptime % 60) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               off
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+
+
+    
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,87 @@
+# /.homeassistant/includes/sensors/people.yaml
+
+################################################################################
+# 
+################################################################################
+  - platform: template
+    sensors:
+      vlad:
+        friendly_name: 'Влад находится'
+        entity_picture_template: '/local/people/vlad.jpg'
+        value_template: >-
+          {% if is_state('device_tracker.sm_g930f','home')  
+             or is_state('device_tracker.ping_vlad', 'on')  %}
+                Дома
+          {% else %}
+            {{ state_attr('sensor.sm_g930f_geokodirovannoe_mestopolozhenie', 'Locality') }}
+            {{ state_attr('sensor.sm_g930f_geokodirovannoe_mestopolozhenie', 'Sub Administrative Area') }}
+            {{ state_attr('sensor.sm_g930f_geokodirovannoe_mestopolozhenie','Thoroughfare',) }}
+            {{ state_attr('sensor.sm_g930f_geokodirovannoe_mestopolozhenie', 'Sub Thoroughfare') }}
+
+          {% endif %}
+        icon_template: mdi:human-handsup
+
+################################################################################
+# 
+################################################################################
+  - platform: template
+    sensors:
+      enia:
+        friendly_name: 'Еня находится'
+        entity_picture_template: '/local/people/enia.jpg'
+        value_template: >-
+          {% if is_state('device_tracker.sm_n985f','home')  
+             or is_state('device_tracker.ping_enia', 'on')  %}
+                Дома
+          {% else %}
+            {{ state_attr('sensor.sm_n985f_geokodirovannoe_mestopolozhenie','Locality',) }}
+            {{ state_attr('sensor.sm_n985f_geokodirovannoe_mestopolozhenie','Sub Administrative Area',) }}
+            {{ state_attr('sensor.sm_n985f_geokodirovannoe_mestopolozhenie','Thoroughfare',) }}
+            {{ state_attr('sensor.sm_n985f_geokodirovannoe_mestopolozhenie', 'Sub Thoroughfare') }}
+          {% endif %}
+        icon_template: mdi:human-handsup
+
+################################################################################
+# 
+################################################################################
+  - platform: template
+    sensors:
+      vova:
+        friendly_name: 'Вова находится'
+        entity_picture_template: '/local/people/vova.jpg'
+        value_template: >-
+          {% if is_state('device_tracker.redmi_note_4x','home')  %}
+                Дома
+          {% else %}
+            {{ state_attr('sensor.redmi_note_4x_geokodirovannoe_mestopolozhenie','Locality',) }}
+            {{ state_attr('sensor.redmi_note_4x_geokodirovannoe_mestopolozhenie','Administrative Area',) }}
+            {{ state_attr('sensor.redmi_note_4x_geokodirovannoe_mestopolozhenie','Thoroughfare',) }}
+            {{ state_attr('sensor.redmi_note_4x_geokodirovannoe_mestopolozhenie', 'Sub Thoroughfare') }}
+          {% endif %}
+        icon_template: mdi:human-handsup
+
+################################################################################
+# 
+################################################################################
+  - platform: template
+    sensors:
+      admin:
+        friendly_name: 'Админ находится'
+        entity_picture_template: '/local/people/admin.jpg'
+        value_template: >-
+          {% if is_state('device_tracker.sm_n910c','home')  
+             or is_state('device_tracker.ping_admin', 'on')  %}
+                Дома
+          {% else %}
+            {{ state_attr('sensor.sm_n910c_geokodirovannoe_mestopolozhenie','Locality',) }}
+            {{ state_attr('sensor.sm_n910c_geokodirovannoe_mestopolozhenie','Sub Administrative Area',) }}
+            {{ state_attr('sensor.sm_n910c_geokodirovannoe_mestopolozhenie','Thoroughfare',) }}
+            {{ state_attr('sensor.sm_n910c_geokodirovannoe_mestopolozhenie', 'Sub Thoroughfare') }}
+          {% endif %}
+        icon_template: mdi:human-handsup
+
+
+
+
+
+

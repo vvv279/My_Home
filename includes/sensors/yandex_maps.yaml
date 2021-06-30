@@ -1,0 +1,45 @@
+# /.homeassistant/includes/sensors/yandex_maps.yaml
+# https://github.com/custom-components/sensor.yandex_maps
+
+################################################################################
+# 
+################################################################################
+- platform: yandex_maps
+  start: zone.home
+  destination: !secret yandex_map_enia
+  name: До работы [Еня]
+- platform: yandex_maps
+  start: device_tracker.sm_n985f
+  destination: zone.home
+  name: До дома [Еня]
+
+
+- platform: yandex_maps
+  start: zone.home
+  destination: !secret yandex_map_vlad
+  name: До работы [Влад]
+- platform: yandex_maps
+  start: device_tracker.sm_g930f
+  destination: zone.home
+  name: До дома [Влад]
+  
+- platform: yandex_maps
+  start: zone.home
+  destination: !secret yandex_map_vova
+  name: До работы [Вова]
+- platform: yandex_maps
+  start: device_tracker.redmi_note_4x
+  destination: zone.home
+  name: До дома [Вова]  
+  
+- platform: yandex_maps
+  start: zone.home
+  destination: !secret yandex_map_vlad
+  name: До работы [Админ]
+- platform: yandex_maps
+  start: device_tracker.sm_n910c
+  destination: zone.home
+  name: До дома [Админ]
+  
+  
+  

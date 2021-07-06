@@ -86,6 +86,6 @@
  - [logbook-card](https://github.com/royto/logbook-card)
  - [PythonScriptsPro](https://github.com/AlexxIT/PythonScriptsPro)
  - [home-assistant-sun-card](https://github.com/AitorDB/home-assistant-sun-card)
-
+ - [zha-network-card](https://github.com/dmulcahey/zha-network-card)
 
 

@@ -85,6 +85,7 @@
  - [lovelace-multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row)
  - [logbook-card](https://github.com/royto/logbook-card)
  - [PythonScriptsPro](https://github.com/AlexxIT/PythonScriptsPro)
+ - [home-assistant-sun-card](https://github.com/AitorDB/home-assistant-sun-card)
 
 
 

@@ -40,7 +40,7 @@
 
 **Интеграции:**
 
- - [HACS](https://hacs.xyz/docs/installation/installation)
+ - [HACS](https://hacs.xyz/)
  - [AirVisual Cloud API](https://www.home-assistant.io/integrations/airvisual)
  - [Alarmo](https://github.com/nielsfaber/alarmo)
  - [Google Cast](https://www.home-assistant.io/integrations/cast)

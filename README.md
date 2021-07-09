@@ -2,6 +2,7 @@
 
 [![hacs badge](https://img.shields.io/badge/HACS-Default-orange.svg)](https://github.com/custom-components/hacs)
 [![HACS Supported](https://img.shields.io/badge/HACS-Supported-green.svg)](https://hacs.xyz)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/custom-components/hacs)
 
 Состояние моей системы в работе
 

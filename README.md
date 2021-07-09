@@ -87,5 +87,11 @@
  - [PythonScriptsPro](https://github.com/AlexxIT/PythonScriptsPro)
  - [home-assistant-sun-card](https://github.com/AitorDB/home-assistant-sun-card)
  - [zha-network-card](https://github.com/dmulcahey/zha-network-card)
+ - [apexcharts-card](https://github.com/RomRider/apexcharts-card#yaxis-options-multi-y-axis)
+
+
+
+
+
 
 

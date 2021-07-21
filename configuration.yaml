@@ -7,70 +7,138 @@ homeassistant:
   time_zone: Europe/Moscow
 
 #Вынос во внешние файлы
+# https://www.home-assistant.io/docs/configuration/customizing-devices/
   customize: !include customize.yaml
+
+
+
 
 #Вынос во внешние файлы
   packages: !include_dir_merge_named includes/packages
-
-
-
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
+#cloud:                                                                         https://www.home-assistant.io/integrations/cloud/
+#config:                                                                        https://www.home-assistant.io/integrations/config/
+#counter:                                                                       https://www.home-assistant.io/integrations/counter/
+#dhcp:
+#frontend:
+#history:
+#image:
+#input_boolean:
+#input_datetime:
+#input_number:
+#input_select:
+#input_text:
+#logbook:
+#map:
+#media_source:
+#mobile_app:
+#my:
+#person:
+#scene:
+#ssdp:
+#sun:
+#system_health:
+#tag:
+#timer:
+#updater:
+#zeroconf:
+#zone:
+recorder:                                                                       #https://www.home-assistant.io/integrations/statistics/
 
+conversation:                                                                       #https://www.home-assistant.io/integrations/conversation/
+  intents:
+# ------------ https://github.com/AlexxIT/YandexStation
+    media_player.yandex_station_741078e2880c241e0350: [.+]  # замените на вашу станцию
+
+
+python_script:
+# requirements:
+# - paramiko>=2.7.1
 # Text to speech
 tts:
   - platform: google_translate
+    language: 'ru'
 
-#
+
 group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
+automation: !include automations.yaml                                           # https://www.home-assistant.io/docs/automation/
+#script: !include scripts.yaml
 scene: !include scenes.yaml
 
 #Вынос во внешние файлы
 proximity: !include includes/proximity.yaml
+utility_meter: !include includes/utility_meter.yaml
+#updater: !include includes/updater.yaml
+input_text: !include includes/input_text.yaml
+input_number: !include includes/input_number.yaml
+input_boolean: !include includes/input_boolean.yaml                             # ПРОВЕРИТЬ
+light: !include includes/light.yaml
 
-#recorder: !include includes/recorder.yaml
+template: !include_dir_merge_list includes/template
+
+
 
 #Вынос во внешние папки
-sensor: !include_dir_merge_list includes/sensor
-binary_sensor: !include_dir_merge_list includes/bin_sensor
+#automation: !include_dir_merge_list includes/automation
 
-stream: !include_dir_merge_list includes/stream   # Стрим Камер видеонаблюдения
-camera:  !include_dir_merge_list includes/stream/camera   # Камеры видеонаблюдения
+sensor: !include_dir_merge_list includes/sensors
+switch: !include_dir_merge_list includes/switch
+binary_sensor: !include_dir_merge_list includes/bin_sensor
+script: !include_dir_merge_named includes/scripts
+
+#stream: !include_dir_merge_list includes/stream   # Стрим Камер видеонаблюдения
+#camera: !include_dir_merge_list includes/stream/camera   # Камеры видеонаблюдения
+
+stream:
+camera: !include includes/camera.yaml
+
+device_tracker: !include_dir_merge_list includes/device_tracker  # https://www.home-assistant.io/integrations/device_tracker/ #https://www.home-assistant.io/integrations/nmap_tracker/
+counter: !include_dir_merge_named includes/counter
+
+#hacs:
+#  token: !secret github_access_token
+
+#speedtestdotnet:
+
+
+start_time: #https://github.com/AlexxIT/StartTime
 
 
 ############################## Configure frontend ##############################
 # Тема
 frontend:
   themes: !include_dir_merge_named themes
+  
+  
 ############################# Configure weather ################################
 # gismeteo
-weather:
-  - platform: gismeteo
-############################ Configure panel_iframe ############################
-panel_iframe:
-  configurator:
-    title: Конфигуратор
-    icon: mdi:square-edit-outline
-    url: http://192.168.1.50:3218/
-  icons:
-    title: Иконки
-    icon: mdi:drawing
-    url: https://cdn.materialdesignicons.com/4.5.95/
-  router:
-    title: "Router"
-    icon: mdi:access-point
-    url: http://192.168.1.1/
-############################# Configure http #############################
-http:
-# sertifikat
+#weather:
+#  - platform: gismeteo
+
+
+################################################################################
+# Configure Certificate Expiry
+################################################################################
+# ------------ Certificate Expiry
+# ------------ https://www.home-assistant.io/integrations/cert_expiry/
+http:                                                                           # https://www.home-assistant.io/integrations/http/
   ssl_certificate: /home/homeassistant/.homeassistant/fullchain.pem
   ssl_key: /home/homeassistant/.homeassistant/privkey.pem
 
-########################## Configure yandex_smart_home #########################
-########################### Configure yandex_station ###########################
+
+# ------------ 
+  cors_allowed_origins:
+    - https://google.com
+    - https://www.home-assistant.io
+  ip_ban_enabled: false
+  login_attempts_threshold: 3
+
+################################################################################
 # Configure yandex_station
+################################################################################
+
+# ------------ https://github.com/AlexxIT/YandexStation
 yandex_station:
   username: !secret yandex_station_username
   password: !secret yandex_station_password
@@ -81,33 +149,146 @@ yandex_station:
   - Утюг
   - Сервер
   - Принтер
+  - Вентилятор
 
+
+# ------------ https://github.com/AlexxIT/YandexStation
   recognition_lang: ru-RU
+# ------------ 
+# https://github.com/dmitry-k/yandex_smart_home
+# https://wiki.yaboard.com/w/Алиса_и_Home_Assistant
+yandex_smart_home:
+  notifier:
+    oauth_token: !secret oauth_token
+    skill_id: !secret skill_id
+    user_id: !secret user_id
+  filter:
+    include_domains:      # Домены, которые будут включать
+      - sensor
+      - light
+    exclude_domains:      # Идентификаторы сущностей для исключения
+      - automation
+      - group
+      - script
+      - media_player
+      - switch
 
-conversation:
-  intents:
-    media_player.yandex_station_###############: [.+]  # замените на вашу станцию
-############################ Configure telegram_bot ############################
-# https://www.home-assistant.io/integrations/telegram/
+################################################################################
 # Configure telegram_bot
+################################################################################
+# ------------ https://www.home-assistant.io/integrations/telegram/
+
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_bot_api_key
     allowed_chat_ids:
-     - !secret telegram_id_1
-     - !secret telegram_id_2
+     - !secret telegram_vlad
+     - !secret telegram_vova
+     - !secret telegram_admin
 notify:
   - name: telegram_id_1
     platform: telegram
-    chat_id: !secret telegram_id_1
+    chat_id: !secret telegram_vlad
+
 # Телеграм Вова
   - name: telegram_id_2
     platform: telegram
-    chat_id: !secret telegram_id_2
+    chat_id: !secret telegram_vova
+
+# Телеграм Admin
+  - name: telegram_id_3
+    platform: telegram
+    chat_id: !secret telegram_admin
+
+################################################################################
+# Configure sonoff
+################################################################################
+# ------------ https://github.com/AlexxIT/SonoffLAN
+sonoff:
+  username: !secret sonoff_username
+  password: !secret sonoff_password
+# mode: cloud
+# mode: local
+  reload: always # обновляйте список устройств при каждом запуске HA
+
+
+################################################################################
+# Configure Xiaomi gateway3
+################################################################################
+# ------------ https://github.com/AlexxIT/XiaomiGateway3#zigbee-and-ble-performance-table
+xiaomi_gateway3:
+  attributes_template: |
+    {% if attr in ('ble', 'zigbee', 'battery') %}{{{
+      "name": device["device_name"],
+      "gate": gateway["device_name"]
+    }}}{% endif %}
+
+################################################################################
+# Configure ZHA
+################################################################################
+# ------------ https://www.home-assistant.io/integrations/zha/
+zha:
+  zigpy_config:
+    network:
+      channel: 15             # What channel the radio should try to use.
+      channels: [15, 20, 25]  # Channel mask
+
+################################################################################
+# Configure MQTT
+################################################################################
+# ------------ https://www.home-assistant.io/integrations/mqtt/
+mqtt:
+  broker: 192.168.1.50
+  port: 1883
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  keepalive: 60
+  discovery: true
+  discovery_prefix: homeassistant
+  client_id: main_ha
+  birth_message:
+    topic: 'servers/main'
+    payload: 'online'
+  will_message:
+    topic: 'servers/main'
+    payload: 'offline'
+
+
+################################################################################
+# Configure 
+################################################################################
+input_datetime:
+  sample:
+    name: vremia_i_data
+    has_time: true
+    has_date: true
+################################################################################
+# Configure 
+################################################################################
+# ------------ https://www.home-assistant.io/integrations/timer/
+timer:
+  laundry:
+    duration: "01:00:00"
+  taimer:
+    duration: "01:00:00"
+
+################################################################################
+# Configure 
+################################################################################
+# ------------ https://github.com/alryaz/hass-moscow-pgu
+#moscow_pgu:
+#  username: !secret moscow_pgu_username
+#  password: !secret moscow_pgu_password
+
+
+
+#system_log:
+#  fire_event: true
+ 
 
 ############################## Configure sensor ##############################
 ###############################  apcupsd ##############################
-apcupsd:
+#apcupsd:
 #  host: 127.0.0.1
 #  port: 3551
 
@@ -115,49 +296,40 @@ apcupsd:
 ############################### Configure stream ###############################
 # Configure stream camera
 ########################### Configure device_tracker ###########################
-# Ping sensors
-# когда человек дома подключен к домашнему Wi-Fi
-device_tracker:
-  - platform: ping
-    scan_interval: 30
-    count: 4
-    consider_home: 120
-    hosts:
-      ping_vlad: !secret vlad_ip
-      ping_admin: !secret admin_ip
-      ping_enia: !secret enia_ip
+
+
+#  - platform: xiaomi
+#    host: 192.168.1.1
+#    password: !secret asus_router_password
 
 ############################## Configure proximity #############################
 # https://www.home-assistant.io/integrations/proximity/
 ######################### Configure mosenergosbyt ##############################
-mosenergosbyt:
-  username: !secret mosenergosbyt_username
-  password: !secret mosenergosbyt_password
+#mosenergosbyt:
+#  username: !secret mosenergosbyt_username
+#  password: !secret mosenergosbyt_password
 
 # Произвольный формат для лицевых счетов
-  account_name: 'Мой супер лицевой счёт'
+#  account_name: 'Мой супер лицевой счёт'
 # Произвольный формат для счётчиков
-  meter_name: 'Счётчик жахает'
+#  meter_name: 'Счётчик жахает'
 # Произвольный формат для квитанций
-  invoice_name: 'За квитанцию платим много!'
+#  invoice_name: 'За квитанцию платим много!'
 
-############################# Configure sonoff #################################
-sonoff:
- username: !secret sonoff_username
- password: !secret sonoff_password
- mode: cloud
-
-############################# Configure nextcloud ##############################
+ ############################# Configure nextcloud ##############################
 #nextcloud:
 # url:!secret nextcloud_url
 # username: !secret nextcloud_username
 # password: !secret nextcloud_password
 
 ############################# Configure samsungtv ##############################
-samsungtv:
-  - host: 192.168.1.204
+#samsungtv:
+#  - host: 192.168.1.204
+############################# Configure Счетчик ##############################
+# https://www.home-assistant.io/integrations/counter/
 
 
 
-
-
+ 
+ 
+ 

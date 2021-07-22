@@ -1,0 +1,409 @@
+# /.homeassistant/includes/packages/telegram/telegram_bot.yaml
+## коды эмоджи для телеграмм - https://unicode.org/Public/emoji/13.1/emoji-test.txt
+## коды эмоджи для телеграмм - https://apps.timwhitlock.info/emoji/tables/unicode
+
+telegram_bot:
+#  sensor:
+#
+
+
+  script:
+################################################################################
+# 
+################################################################################
+    send_message_1:
+      alias: Отправка через сервис уведомлений
+      sequence:
+      - service: notify.telegram_id_1
+        data:
+          message: "Текущее время - {{ states('sensor.time') }} . Все в порядке"
+      - service: notify.telegram_id_2
+        data:
+          message: "Текущее время - {{ states('sensor.time') }} . Все в порядке"
+      - service: notify.telegram_id_3
+        data:
+          message: "Текущее время - {{ states('sensor.time') }} . Все в порядке"
+
+
+
+  automation:
+################################################################################
+# Telegram Bot Automations
+################################################################################
+# ------------ Mirror all text messages
+  - id: Телеграмм бота Mirror text
+    alias: mirror_text
+    trigger:
+    - platform: event
+      event_type: telegram_text
+    action:
+    - service: notify.telegram_id_3
+      data_template:
+        message: |
+          *{{ trigger.event.data.from_first }} {{ trigger.event.data.from_last }} [{{ trigger.event.data.user_id }}] пишет:*
+          {{ trigger.event.data.text }}
+
+# ------------ /start
+  - id: Телеграмм бота - Start
+    alias: telegram_start
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data: 
+        command: '/start'
+    action:
+    - service: telegram_bot.send_message
+      data_template:
+        target: '{{ trigger.event.data.user_id }}'
+        message: 'Привет! Нужна помощь жми - /help'
+
+# ------------ /help
+  - id: Телеграмм бота - Help
+    alias: telegram_help
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data: 
+        command: '/help'
+    action:
+    - service: telegram_bot.send_message
+      data_template:
+        target: '{{ trigger.event.data.user_id }}'
+        message: |
+          Доступные комманды:
+          
+          /keyboard - Клавиатура бота
+          
+          /report - Запрос на отчет  
+          /home - Узнать кто дома
+          /pogoda - Погода за окном
+          /pogodadoma - Погода в доме
+          /ping - Проверить доступность сервиса HASS
+          /status - Текущий статус устройств
+          /keyboard - Клавиатура бота
+          /lightKR - Вкл. свет в коридоре
+          /lightOffKR - Выкл. свет в коридоре
+          /lightSP - Вкл. свет в спальне
+          /lightOffSP - Выкл. свет в спальне
+          /lightZL - Вкл. свет в зале
+          /lightOffZL - Выкл. свет в зале
+          /lightKH - Вкл. свет на кухне  
+          /lightOffKH - Выкл. свет на кухне
+          /lightVN - Вкл. свет в ванной 
+          /lightOffVN - Выкл. свет в ванной
+          
+          
+# ------------ /keyboard
+  - id: Телеграмм бота - Keyboard
+    alias: telegram_keyboard
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data: 
+        command: '/keyboard'
+    action:
+    - service: notify.telegram_id_1
+      data:
+        message: 'commands'
+        data:
+          keyboard:
+            - '/report, /home, /ping, /pogodadoma'
+            - '/pogoda, /status, /lightKR, /lightOffKR'
+            - '/lightSP, /lightOffSP, /lightZL, /lightOffZL'
+            - '/lightKH, /lightOffKH, /lightVN, /lightOffVN'
+    - service: notify.telegram_id_2
+      data:
+        message: 'commands'
+        data:
+          keyboard:
+            - '/report, /home, /ping, /pogodadoma'
+            - '/pogoda, /status'
+    - service: notify.telegram_id_3
+      data:
+        message: 'commands'
+        data:
+          keyboard:
+            - '/report, /home, /ping, /pogodadoma'
+            - '/pogoda, /status, /lightKR, /lightOffKR'
+            - '/lightSP, /lightOffSP, /lightZL, /lightOffZL'
+            - '/lightKH, /lightOffKH, /lightVN, /lightOffVN'
+
+###############################################################################
+# ---- /keyboard
+#  - id: Телеграмм бота - Keyboard
+#    alias: telegram_keyboard
+#    trigger:
+#    - platform: event
+#      event_type: telegram_command
+#      event_data: 
+#        command: '/keyboard'
+#    action:
+#    - service: telegram_bot.send_message
+#      data_template:
+#        target: '{{ trigger.event.data.user_id }}'
+#        message: 'commands'
+#        data:
+#          keyboard:
+#            - '/report, /light'
+#            - '/pogoda, /light2, /light3'
+#            - '/report3, /light4, /light5'
+################################################################################
+
+# ------------ /ping
+  - id: Телеграмм бота - Ping
+    alias: telegram_ping
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data: 
+        command: '/ping'
+    action:
+    - service: telegram_bot.send_message
+      data_template:
+        target: '{{ trigger.event.data.user_id }}'
+        message: |
+          Ping! *{{ now().strftime("%d.%m.%Y %H:%M:%S") }}*
+          Версия Home Assistant: *{{ states('sensor.ha_installed_version') }}*
+          Сервер в онлайне: *{{ states('sensor.ha_uptime') }}* min.
+#          Сервер в онлайне: {{ states('sensor.online_custom') }}
+          
+#          DB Size: {{ states('sensor.hass_db_size') }} {{ state_attr('sensor.hass_db_size','unit_of_measurement') }}
+#          Uptime: {{ states('sensor.ha_uptime') }} min.
+
+# ---- /home     #/weather
+# /.homeassistant/includes/packages/telegram/person_telegram.yaml
+
+# ---- /pogoda         /weather
+#/.homeassistant/includes/packages/meteo/meteo.yaml
+
+# ------------ /status         https://github.com/avbor/HomeAssistantConfig/blob/master/automations/auto_telegram.yaml
+  - id: Телеграмм бота - Status
+    alias: telegram_status
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data: 
+        command: '/status'
+    action:
+    - service: telegram_bot.send_message
+      data_template:
+        target: '{{ trigger.event.data.user_id }}'
+        message: |
+          *Статус устройств*
+
+          `-= Свет =-`
+          Свет в доме: *{{ states('binary_sensor.super_light') }}*   
+          *Если *ON* смотри ниже*
+          Свет в коридоре: *{{ states('light.sonoff_a48001350d') }}*
+          Свет в зале: *{{ states('switch.sonoff_10010fb187') }}*
+          Свет в спальне: *{{ states('switch.sonoff_10010eecd0') }}*
+          Свет в кухне: *{{ states('switch.sonoff_10010e877e') }}*
+          Свет в ванной: *{{ states('switch.sonoff_10010f89a2') }}*
+
+          `-= Розетки =-`
+          Розетка принтер: *{{ states('switch.printer') }}*
+          Розетка сервер: *{{ states('switch.server') }}*
+          Розетка сушка: *{{ states('switch.sushka') }}*
+          Розетка утюг: *{{ states('switch.utiug') }}*
+          Розетка телек: *{{ states('switch.telek') }}*
+          Розетка вент: *{{ states('switch.ventiliator') }}*
+          Розетка заряд пылис: *{{ states('switch.sonoff_10010f2f6c') }}*
+
+          `-= ТВ =-`
+          Спальне: *{{ states('media_player.samsung_qe55q7fam') }}*
+
+          `-= Yandex station =-`
+          Спальне: *{{ states('media_player.yandex_station_741078e2880c241e0350') }}*
+
+          `-= Разное =-`
+          Телефон Влад: *{{ states('sensor.sm_g930f_uroven_zariada_akkumuliatora') }} %*
+          Телефон Еня: *{{ states('sensor.sm_n985f_uroven_zariada_akkumuliatora') }} %*
+          Телефон Вова: *{{ states('sensor.redmi_note_4x_uroven_zariada_akkumuliatora') }} %*
+          Телефон Ляля: *{{ states('sensor.sm_n910c_uroven_zariada_akkumuliatora') }} %*
+
+
+#          *Климат*
+#          Коридор: *{{ states('sensor.0x158d0003230618_temperature') }}°C*, {{ states('sensor.0x158d0003230618_humidity') }}%
+#          Зал: *{{ states('sensor.0x158d0003931aec_temperature') }}°C*, {{ states('sensor.0x158d0003931aec_humidity') }}%
+#          Спальня: *{{ states('sensor.sonoff_a4800110d3_temperature') }}°C*, {{ states('sensor.sonoff_a4800110d3_humidity') }}%
+#          Кухня: *{{ states('sensor.0x158d0003931a55_temperature') }}°C*, {{ states('sensor.0x158d0003931a55_humidity') }}%
+#          Ванная: *{{ states('sensor.a4c138414e9a_temperature') }}°C*, {{ states('sensor.a4c138414e9a_humidity') }}%
+#          Коридор: *{{ states('sensor.0x158d00039e2ecb_temperature') }}°C*, {{ states('sensor.0x158d00039e2ecb_humidity') }}%
+#          Тамбур: *{{ states('sensor.0x158d00039e2ecb_temperature') }}°C*, {{ states('sensor.0x158d00039e2ecb_humidity') }}%
+
+#          `-= Датчики протечки =-`
+#          Нептун (кладовая, туалет, ванна, кухня): *{{ states('binary_sensor.neptun_water_leakage') }}*
+#          Aqara кладовая: *{{ states('binary_sensor.0x158d000400e77d_moisture') }}*
+#          Aqara под ванной (слева): *{{ states('binary_sensor.0x158d0004030d84_moisture') }}*
+
+#          `-= Кондиционеры =-`
+#          Зал: *{{ states('binary_sensor.0x158d00039cf974_contact') }}*
+#          Спальня: *{{ states('binary_sensor.0x158d0003d54725_contact') }}*
+
+#          `-= Разное =-`
+#          Входная дверь: *{{ states('sensor.entrance_door_status') }}*
+
+#          Водонагреватель: *{{ states('sensor.boiler_status') }}* ({{ states('sensor.tplinksmartplug01_watts') }} W)
+#          Transmission Status: *{{ states('sensor.transmission_status') }}*
+#          Plex Users: *{{ states('sensor.plex_plexonubuntu') }}*   *Климат*
+
+
+
+
+
+
+# ------------ /report
+  - id: Запрос на отчет
+    alias: send_report
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/report'
+    action:
+    - service: script.turn_on
+      entity_id:
+        - script.system_report
+
+# ------------ /lightKR
+  - id: Включить свет в коридоре
+    alias: send_light_sonoff_a48001350d
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightKR'
+    action:
+    - service: light.turn_on
+      entity_id:
+        - light.sonoff_a48001350d
+#        - switch.sonoff_10010f2f6c # Включить свет в коридоре 
+
+# ------------ /lightOffKR
+  - id: Выключить свет в коридоре
+    alias: off_light_sonoff_a48001350d 
+    initial_state: true          
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightOffKR'
+    action:
+    - service: light.turn_off
+      entity_id:
+        - light.sonoff_a48001350d 
+
+# ------------ /lightSP
+  - id: Включить свет в спальне
+    alias: send_light_sonoff_10010eecd0
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightSP'
+    action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.sonoff_10010eecd0 
+
+# ------------ /lightOffSP
+  - id: Выключить свет в спальне
+    alias: off_light_sonoff_10010eecd0 
+    initial_state: true          
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightOffSP'
+    action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.sonoff_10010eecd0 
+
+# ------------ /lightZL
+  - id: Включить свет в зале
+    alias: send_light_sonoff_10010fb187
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightZL'
+    action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.sonoff_10010fb187  
+
+# ------------ /lightOffZL
+  - id: Выключить свет в зале
+    alias: off_light_sonoff_10010fb187
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightOffZL'
+    action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.sonoff_10010fb187  
+
+# ------------ /lightKH 
+  - id: Включить свет в кухне
+    alias: send_light_sonoff_10010e877e
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightKH'
+    action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.sonoff_10010e877e 
+
+# ------------ lightOffKH
+  - id: Выключить свет в кухне
+    alias: off_light_sonoff_10010e877e
+    initial_state: true          
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightOffKH'
+    action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.sonoff_10010e877e
+
+# ------------ /lightVN 
+  - id: Включить свет в ванной
+    alias: send_light_sonoff_10010f89a2
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightVN'
+    action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.sonoff_10010f89a2
+
+# ------------ /lightOffVN
+  - id: Выключить свет в ванной
+    alias: off_light_sonoff_10010f89a2
+    initial_state: true          
+    trigger:
+    - platform: event
+      event_type: telegram_command
+      event_data:
+        command: '/lightOffVN'
+    action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.sonoff_10010f89a2
+

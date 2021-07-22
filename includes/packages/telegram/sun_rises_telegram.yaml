@@ -1,72 +1,84 @@
 # /.homeassistant/includes/packages/telegram/sun_rises_telegram.yaml
 sun_rises_telegram:
 
-    automation:
-
-
-# ---- Полнолуние
-        - id: Полнолуние [notify to stall]
-          alias: Send_notification_stall
-          initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: sensor.moon
-            to: "full_moon"
-          action:
-          - service: notify.telegram_id_1
+  automation:
+################################################################################
+# Moon
+################################################################################
+# ------------ https://www.home-assistant.io/integrations/moon/
+# ------------ Полнолуние
+  - alias: send_notification_stall
+#        - id: Полнолуние [notify to stall]
+    initial_state: true           #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+      - platform: state
+        entity_id: sensor.moon
+        to: "full_moon"
+    action:
+     - service: notify.telegram_id_1
 #            data_template:
-            data:
-              message: | 
-                  {{"\U0001F315"}}"Сегодня полнолуние! {{ states('sensor.time') }}"
-          - service: notify.telegram_id_2
-            data:
-              message: | 
-                  {{"\U0001F315"}}"Сегодня полнолуние! {{ states('sensor.time') }}"
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F315"}}"Сегодня полнолуние! {{ states('sensor.time') }}"
+       data:
+        message: | 
+          {{"\U0001F315"}}"Сегодня полнолуние! {{ states('sensor.time') }}"
+     - service: notify.telegram_id_2
+       data:
+         message: | 
+           {{"\U0001F315"}}"Сегодня полнолуние! {{ states('sensor.time') }}"
+     - service: notify.telegram_id_2
+       data:
+         message: | 
+           {{"\U0001F315"}}"Сегодня полнолуние! {{ states('sensor.time') }}"
+     - service: notify.telegram_id_3
+       data:
+         message: | 
+           {{"\U0001F315"}}"Сегодня полнолуние! {{ states('sensor.time') }}"
+
+################################################################################
+# Sun
+################################################################################
+# ------------ https://www.home-assistant.io/integrations/sun/
+# ------------ Солнце уже взошло
+#        - id: Отправить уведомление, когда взойдет солнце
+  - alias: send_notification_when_sun_rises
+    initial_state: true        # true  - для работы поставить true отключить false!!!
+    trigger:
+      - platform: sun
+        event: sunrise # above_horizon
+        offset: +00:00:00
+    action:
+      - service: notify.telegram_id_1
+        data:
+          message: | 
+            {{"\U0001F31E"}}"Солнце уже взошло в {{ states('sensor.time') }}"
+      - service: notify.telegram_id_2
+        data:
+          message: | 
+            {{"\U0001F31E"}}"Солнце уже взошло в {{ states('sensor.time') }}"
+      - service: notify.telegram_id_3
+        data:
+          message: | 
+            {{"\U0001F31E"}}"Солнце уже взошло в {{ states('sensor.time') }}"
+
+# ------------ Солнце садится
+#        - id: Отправить уведомление, когда солнце садится
+  - alias: send_notification_when_sun_sets
+    initial_state: true        # true  - для работы поставить true отключить false!!!
+    trigger:
+      - platform: sun
+        event: sunset # below_horizon
+        offset: -00:00:00
+    action:
+      - service: notify.telegram_id_1
+        data:
+          message: | 
+            {{"\U0001F31C"}}"Солнце садится в {{ states('sensor.time') }}"
+      - service: notify.telegram_id_2
+        data:
+          message: | 
+            {{"\U0001F31C"}}"Солнце садится в {{ states('sensor.time') }}"
+      - service: notify.telegram_id_3
+        data:
+          message: | 
+            {{"\U0001F31C"}}"Солнце садится в {{ states('sensor.time') }}"
 
 
-
-        - id: Отправить уведомление, когда взойдет солнце
-          alias: Send notification when sun rises
-          initial_state: true        # true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: sun
-            event: sunrise # above_horizon
-            offset: +00:00:00
-          action:
-          - service: notify.telegram_id_1
-            data:
-              message: | 
-                  {{"\U0001F31E"}}"Солнце уже взошло в {{ states('sensor.time') }}"
-          - service: notify.telegram_id_2
-            data:
-              message: | 
-                  {{"\U0001F31E"}}"Солнце уже взошло в {{ states('sensor.time') }}"
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F31E"}}"Солнце уже взошло в {{ states('sensor.time') }}"
-
-        - id: Отправить уведомление, когда солнце садится
-          alias: Send notification when sun sets
-          initial_state: true        # true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: sun
-            event: sunset # below_horizon
-            offset: -00:00:00
-          action:
-          - service: notify.telegram_id_1
-            data:
-              message: | 
-                  {{"\U0001F31C"}}"Солнце садится в {{ states('sensor.time') }}"
-          - service: notify.telegram_id_2
-            data:
-              message: | 
-                  {{"\U0001F31C"}}"Солнце садится в {{ states('sensor.time') }}"
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F31C"}}"Солнце садится в {{ states('sensor.time') }}"

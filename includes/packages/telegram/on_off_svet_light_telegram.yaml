@@ -1,0 +1,147 @@
+#/.homeassistant/includes/packages/telegram/ on_off_svet_light_telegram.yaml
+# Коды для телеграмм смайлов - https://apps.timwhitlock.info/emoji/tables/unicode
+
+on_off_svet_light_telegramm:
+
+  automation:
+
+# ------------ 
+  - id: Уведомление о включении света в коридоре
+    alias: send_on_off_svet_light_sonoff_10010f2f6c_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: light.sonoff_a48001350d # Включить свет в коридоре 
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в коридоре включен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о выключении света в коридоре
+    alias: send_on_off_svet_light_sonoff_10010f2f6c_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: light.sonoff_a48001350d # Выключить свет в коридоре 
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в коридоре выключен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о включении света в спальне
+    alias: send_on_off_svet_light_sonoff_10010eecd0_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010eecd0 # Включить свет в спальне
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в спальне включен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о выключении света в спальне
+    alias: send_on_off_svet_light_sonoff_10010eecd0_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010eecd0 # Выключить свет в спальне
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в спальне выключен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о включении света в зале
+    alias: send_on_off_svet_light_sonoff_10010fb187_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010fb187 # Включить свет в зале
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в зале включен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о выключении света в зале
+    alias: send_on_off_svet_light_sonoff_10010fb187_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010fb187 # Выключить свет в зале
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в зале выключен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о включении света в кухне
+    alias: send_on_off_svet_light_sonoff_10010e877e_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010e877e # Включить кухне в кухне
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в кухне включен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о выключении света в кухне
+    alias: send_on_off_svet_light_sonoff_10010e877e_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010e877e # Выключить свет в кухне
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в кухне выключен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о включении света в ванной
+    alias: send_on_off_svet_light_sonoff_10010f89a2_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010f89a2 # Включить в ванной
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в ванной включен в - {{ states('sensor.time') }} "
+
+# ------------ 
+  - id: Уведомление о выключении света в ванной
+    alias: send_on_off_svet_light_sonoff_10010f89a2_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010f89a2 # Выключить свет в ванной
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F4A1"}}"Свет в ванной выключен в - {{ states('sensor.time') }} "
+

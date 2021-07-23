@@ -1,201 +1,201 @@
 #/.homeassistant/includes/packages/telegram/on_off_rozetki_telegram.yaml
 on_off_rozetki_telegramm:
 
-    automation:
+  automation:
 # ------------ 
-        - id: Уведомление о включении розетки принтер
-          alias: send_on_off_rozetki_printer_on
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.printer 
-            to: 'on'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка принтер включина в - {{ states('sensor.time') }} "
+  - id: Уведомление о включении розетки принтер
+    alias: send_on_off_rozetki_printer_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.printer 
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка принтер включина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о выключении розетки принтер
-          alias: send_on_off_rozetki_printer_off
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.printer 
-            to: 'off'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка принтер выключина в - {{ states('sensor.time') }} "
+  - id: Уведомление о выключении розетки принтер
+    alias: send_on_off_rozetki_printer_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.printer 
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка принтер выключина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о включении розетки сервера
-          alias: send_on_off_rozetki_server_on
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.server 
-            to: 'on'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка сервер включина в - {{ states('sensor.time') }} "
+  - id: Уведомление о включении розетки сервера
+    alias: send_on_off_rozetki_server_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.server 
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка сервер включина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о выключении розетки сервера
-          alias: send_on_off_rozetki_server_off
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.server 
-            to: 'off'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка сервер выключина в - {{ states('sensor.time') }} "
+  - id: Уведомление о выключении розетки сервера
+    alias: send_on_off_rozetki_server_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.server 
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка сервер выключина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о включении розетки сушка
-          alias: send_on_off_rozetki_sushka_on
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.sushka 
-            to: 'on'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка сушка включина в - {{ states('sensor.time') }} "
+  - id: Уведомление о включении розетки сушка
+    alias: send_on_off_rozetki_sushka_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sushka 
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка сушка включина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о выключении розетки сушка
-          alias: send_on_off_rozetki_sushka_off
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.sushka 
-            to: 'off'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка сушка выключина в - {{ states('sensor.time') }} "
+  - id: Уведомление о выключении розетки сушка
+    alias: send_on_off_rozetki_sushka_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sushka 
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка сушка выключина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о включении розетки утюга
-          alias: send_on_off_rozetki_utiug_on
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.utiug 
-            to: 'on'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка утюг включина в - {{ states('sensor.time') }} "
+  - id: Уведомление о включении розетки утюга
+    alias: send_on_off_rozetki_utiug_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.utiug 
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка утюг включина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о выключении розетки утюга
-          alias: send_on_off_rozetki_utiug_off
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.utiug 
-            to: 'off'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка утюг выключина в - {{ states('sensor.time') }} "
+  - id: Уведомление о выключении розетки утюга
+    alias: send_on_off_rozetki_utiug_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.utiug 
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка утюг выключина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о включении розетки телека
-          alias: send_on_off_rozetki_telek_on
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.telek
-            to: 'on'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка телек включина в - {{ states('sensor.time') }} "
+  - id: Уведомление о включении розетки телека
+    alias: send_on_off_rozetki_telek_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.telek
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка телек включина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о выключении розетки телека
-          alias: send_on_off_rozetki_telek_off
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.telek
-            to: 'off'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка телек выключина в - {{ states('sensor.time') }} "
+  - id: Уведомление о выключении розетки телека
+    alias: send_on_off_rozetki_telek_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.telek
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка телек выключина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о включении розетки вентилятора
-          alias: send_on_off_rozetki_ventiliator_on
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.ventiliator
-            to: 'on'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка вентилятор включина в - {{ states('sensor.time') }} "
+  - id: Уведомление о включении розетки вентилятора
+    alias: send_on_off_rozetki_ventiliator_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.ventiliator
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка вентилятор включина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о выключении розетки вентилятора
-          alias: send_on_off_rozetki_ventiliatork_off
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.ventiliator
-            to: 'off'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка вентилятор выключина в - {{ states('sensor.time') }} "
+  - id: Уведомление о выключении розетки вентилятора
+    alias: send_on_off_rozetki_ventiliatork_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.ventiliator
+      to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка вентилятор выключина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о включении розетки Зарядка пылесоса
-          alias: send_on_off_rozetki_zaryad_pilisos_on
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.sonoff_10010f2f6c
-            to: 'on'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка заряда пылесоса включина в - {{ states('sensor.time') }} "
+  - id: Уведомление о включении розетки Зарядка пылесоса
+    alias: send_on_off_rozetki_zaryad_pilisos_on
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+    - platform: state
+      entity_id: switch.sonoff_10010f2f6c
+      to: 'on'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка заряда пылесоса включина в - {{ states('sensor.time') }} "
 
 # ------------ 
-        - id: Уведомление о выключении Зарядка пылесоса
-          alias: send_on_off_rozetki_zaryad_pilisos_off
-          initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
-          trigger:
-          - platform: state
-            entity_id: switch.sonoff_10010f2f6c
-            to: 'off'
-          action:
-          - service: notify.telegram_id_3
-            data:
-              message: | 
-                  {{"\U0001F50C"}}"Розетка заряда пылесоса выключина в - {{ states('sensor.time') }} "
+  - id: Уведомление о выключении Зарядка пылесоса
+    alias: send_on_off_rozetki_zaryad_pilisos_off
+    initial_state: true        #   initial_state: true  - для работы поставить true отключить false!!!
+    trigger:
+     - platform: state
+       entity_id: switch.sonoff_10010f2f6c
+       to: 'off'
+    action:
+    - service: notify.telegram_id_3
+      data:
+        message: | 
+          {{"\U0001F50C"}}"Розетка заряда пылесоса выключина в - {{ states('sensor.time') }} "
 
 

@@ -49,7 +49,7 @@ recorder:                                                                       
 conversation:                                                                       #https://www.home-assistant.io/integrations/conversation/
   intents:
 # ------------ https://github.com/AlexxIT/YandexStation
-    media_player.yandex_station_741078e2880c241e0350: [.+]  # замените на вашу станцию
+    media_player.yandex_station_: [.+]  # замените на вашу станцию
 
 
 python_script:

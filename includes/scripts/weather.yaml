@@ -1,0 +1,41 @@
+# /.homeassistant/includes/scripts/weather.yaml
+
+################################################################################
+# 
+################################################################################
+  weather_tts:
+    alias: Weather to Speakers
+    sequence:
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.yandex_station_741078e2880c241e0350
+          volume_level: 0.6
+      - service: tts.yandex_station_say
+        data:
+          entity_id: media_player.yandex_station_741078e2880c241e0350
+          message: >-
+            {%- set date = as_timestamp(now()) -%}
+            {%- set weekday_list = ['Понедельник','Вторник','Среда','Четверг','Пятница','Суббота','Воскресенье'] %}
+            {%- set month_list = ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'] %}
+            {%- set day_list = ['первое','второе','третье','четвертое','пятое','шестое','седьмое','восьмое','девятое','десятое','одиннадцатое','двенадцатое','тринадцатое','четырнадцатое','пятнадцатое','шестнадцатое','семнадцатое','восемнадцатое','девятнадцатое','двадцатое','двадцать первое','двадцать второе','двадцать третье','двадцать четвертое','двадцать пятое','двадцать шестое','двадцать седьмое','двадцать восьмое','двадцать девятое','тридцатое','тридцать первое'] %}
+            {%- set m_ok = date | timestamp_custom("%m") | int %}
+            {%- set wd_ok = date | timestamp_custom("%w") | int %}
+            {%- set d_ok = date | timestamp_custom("%d") | int %}
+            {%- set weekday = weekday_list[wd_ok-1] %} 
+            {%- set day = day_list[d_ok-1] %}
+            {%- set month = month_list[m_ok-1] %} 
+            {%- set hour_num = now().hour | int %}
+            {%- if hour_num >=6 and hour_num <10 %}
+            Д+оброе +утро!
+            Сег+одня {{ weekday }} {{ day }} {{ month }}.
+            В нас+тоя+щее вре+мя тем+пера+тура дома {{states.sensor.sonoff_a4800110d3_temperature_sp.state}} гра+дусов, на ули+це сейчас {{states.sensor.openweathermap_temperature_dom.state|round}} граду+са.
+            {%- elif hour_num>=10 and hour_num<17 %}
+            Д+обрый д+ень!
+            В нас+тоя+щее вре+мя тем+пера+тура дома {{states.sensor.sonoff_a4800110d3_temperature_sp.state}} гра+дусов, на ули+це сейчас {{states.sensor.openweathermap_temperature_dom.state|round}} граду+са.
+            {%- elif hour_num>=17 and hour_num<22 %}
+            Д+обрый в+ечер!
+            В нас+тоя+щее вре+мя тем+пера+тура дома {{states.sensor.sonoff_a4800110d3_temperature_sp.state}} гра+дусов, на ули+це сейчас {{states.sensor.openweathermap_temperature_dom.state|round}} граду+са.
+            {%- else %}
+            Д+оброй н+очи!
+            {%- endif %}        
+

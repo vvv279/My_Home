@@ -1,0 +1,47 @@
+# /.homeassistant/includes/scripts/yandex_station.yaml
+
+################################################################################
+# YandexStation
+################################################################################
+
+# ------------ https://github.com/AlexxIT/YandexStation
+# ------------ Для синхронизации списков покупок
+  update_shopping_list:
+    alias: Обновить список покупок
+    sequence:
+      - service: media_player.play_media
+        entity_id: !secret media_player_yandex_station # замените на вашу колонку
+        data:
+          media_content_id: update
+          media_content_type: shopping_list
+
+# ------------ Проигрывание плейлиста П. Гагарина
+  yandex_play_playlist_p_gagarina:
+    alias: Плейлист П. Гагарина
+    sequence:
+    - service: media_player.play_media
+      entity_id: !secret media_player_yandex_station  # замените на вашу колонку
+      data:
+        media_content_id: !secret playlists_1014
+        media_content_type: xxx  # тип не важен, но должен быть!
+
+# ------------ Проигрывание плейлиста Лучшие песни русского рока
+  yandex_play_playlist_the_best_songs_of_russian_rock:
+    alias: Лучшие песни русского рока
+    sequence:
+    - service: media_player.play_media
+      entity_id: !secret media_player_yandex_station  # замените на вашу колонку
+      data:
+        media_content_id: https://music.yandex.ru/users/music.partners/playlists/2050
+        media_content_type: xxx  # тип не важен, но должен быть!
+
+# ------------ Проигрывание плейлиста Вечный синти-поп
+  yandex_play_playlist_eternal_synthpop:
+    alias: Вечный синти-поп
+    sequence:
+    - service: media_player.play_media
+      entity_id: !secret media_player_yandex_station  # замените на вашу колонку
+      data:
+        media_content_id: https://music.yandex.ru/users/music-blog/playlists/2275
+        media_content_type: xxx  # тип не важен, но должен быть!
+

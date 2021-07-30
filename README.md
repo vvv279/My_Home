@@ -94,7 +94,7 @@
   * [zha-network-card](https://github.com/dmulcahey/zha-network-card)
   * [apexcharts-card](https://github.com/RomRider/apexcharts-card#yaxis-options-multi-y-axis)
   * [lovelace-fold-entity-row](https://github.com/thomasloven/lovelace-fold-entity-row)
-
+  * [lovelace-layout-card](https://github.com/thomasloven/lovelace-layout-card)
 
 
 

@@ -1,0 +1,265 @@
+# /.homeassistant/includes/packages/shopping/sensor_shopping_list.yaml
+
+# https://sprut.ai/client/article/4232
+################################################################################
+# YandexStation
+################################################################################
+shopping_list_sensor:
+
+  sensor:
+  - platform: command_line                                                      # https://www.home-assistant.io/integrations/sensor.command_line/
+    name: "Список покупок - сенсор"
+    command: python3 /home/homeassistant/.homeassistant/python_scripts/shopping_list.py
+    json_attributes:
+      - not_complete
+      - content
+    value_template: '{{ value_json.state }}'
+    scan_interval: 1
+
+# ------------ 
+  yandex_station:
+    intents:
+      обнови список:
+      обнови список продуктов:
+      отправь на телефон:
+      отправь на телеграм:
+      да:
+      нет:
+      хватит:
+      отбой:
+      список продуктов:
+      что там в списке:
+      что там в корзине:
+
+
+  script:
+# ------------ 
+    shopping_list_yandex_dialog:
+      alias: Список покупок Алиса. Диалог
+      sequence:
+        - service: media_player.play_media
+          entity_id: !secret media_player_yandex_station
+          data:
+            media_content_id: >-
+              {{ ['Список покупок обновлен, что будем делать?','Шеф. Отправить список
+              к вам на телефон?','Хозяин. Отправить список покупок на
+              телефон?']|random }}
+            media_content_type: dialog
+      mode: single
+      icon: mdi:cart-variant
+
+
+#    shopping_list_yandex_dialog:
+#      alias: Список покупок Алиса. Диалог
+#      sequence:
+#        - service: media_player.play_media
+#          target:
+#            entity_id: '{{ states.input_text.active_station.state }}'          # переменная, последняя активная колонка
+#          data:
+#            media_content_id: >-
+#              {{ ['Список покупок обновлен, что будем делать?','Шеф. Отправить список
+#              к вам на телефон?','Хозяин. Отправить список покупок на
+#              телефон?']|random }}
+#            media_content_type: dialog
+#      mode: single
+#      icon: mdi:cart-variant
+
+# ------------ 
+    update_shopping_list_yandex:
+      alias: Яндек Обновить список покупок
+      sequence:
+        - service: media_player.play_media
+          entity_id: !secret media_player_yandex_station
+          data:
+            media_content_id: update
+            media_content_type: shopping_list
+      icon: mdi:cart-arrow-down
+
+
+#    update_shopping_list_yandex:
+#      alias: Яндек Обновить список покупок
+#      sequence:
+#        - service: media_player.play_media
+#          data:
+#            media_content_id: update
+#            media_content_type: shopping_list
+#          target:
+#            entity_id: '{{ states.input_text.active_station.state }}'          # переменная, последняя активная колонка
+#      mode: single
+#      icon: mdi:cart-arrow-down
+
+# ------------ 
+  input_boolean:
+    shopping_list:
+      name: Список покупок
+
+  automation:
+# ------------ 
+  - alias: Список покупок Алиса. Диалог
+    description: >-
+      Когда просим Алиса обновить список покупок, то срабоатет автоматизацию и
+      запустится скрипт обновления списка
+    trigger:
+      - platform: event
+        event_type: yandex_intent
+        event_data: {}
+      - platform: state
+        entity_id: !secret media_player_yandex_station
+        to: IDLE
+        id: yandex station idle
+        attribute: alice_state
+        from: LISTENING
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ trigger.event.data.text in ["список продуктов", "что там в
+                  списке","что там в корзине"] }}
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.shopping_list
+              - service: script.update_shopping_list_yandex
+          - conditions:
+              - condition: state
+                entity_id: sensor.spisok_pokupok_sensor
+                state: Список полон
+              - condition: state
+                entity_id: input_boolean.shopping_list
+                state: 'on'
+              - condition: template
+                value_template: '{{ trigger.event.data.text in ["хватит", "отбой"] }}'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.shopping_list
+              - delay:
+                  hours: 0
+                  minutes: 0
+                  seconds: 3
+                  milliseconds: 0
+              - service: script.shopping_list_yandex_dialog
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ trigger.event.data.text in ["обнови список", "обнови список
+                  продуктов"] }}
+            sequence:
+              - service: script.update_shopping_list_yandex
+          - conditions:
+              - condition: trigger
+                id: yandex station idle
+              - condition: state
+                entity_id: input_boolean.shopping_list
+                state: 'on'
+              - condition: state
+                entity_id: sensor.spisok_pokupok_sensor
+                state: Список пуст
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.shopping_list
+          - conditions:
+              - condition: trigger
+                id: yandex station idle
+              - condition: state
+                entity_id: sensor.spisok_pokupok_sensor
+                state: Список полон
+              - condition: state
+                entity_id: input_boolean.shopping_list
+                state: 'on'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.shopping_list
+              - delay:
+                  hours: 0
+                  minutes: 0
+                  seconds: 3
+                  milliseconds: 0
+              - service: script.shopping_list_yandex_dialog
+        default: []
+    mode: single
+
+# ------------ 
+  - alias: Список покупок Алиса. Диалог. Отправить список в телеграм
+    description: >-
+      Когда просим Алиса обновить список покупок, то срабоатет автоматизацию и
+      запустится скрипт обновления списка
+    trigger:
+      - platform: event
+        event_type: yandex_intent
+        event_data: {}
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: template
+                    value_template: >-
+                      {{ trigger.event.data.text in ["отправь на телефон", "отправь
+                      на телеграмм","да"] }}
+            sequence:
+              - service: tts.yandex_station_say
+                data:
+                  entity_id: !secret media_player_yandex_station                #'{{ states.input_text.active_station.state }}'
+                  message: >-
+                    {{ ['Готово. Отправила к вам на телефон список продуктов ', 'Как
+                    скажешь хозяин. Список продуктов отправлен в телеграм', 'Есть
+                    сэр. Список продуктов отправлен в телеграм', 'Не вопрос.
+                    Отправила  к вам на телефон список продуктов']|random }}
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 3
+          milliseconds: 0
+#      - service: notify.notify
+#        data:
+#          message: '{{ states.sensor.spisok_pokupok_sensor.attributes.content }}'
+#          title: '*Список покупок:*'
+      - service: notify.telegram_id_1
+        data:
+          message: '{{ states.sensor.spisok_pokupok_sensor.attributes.content }}'
+          title: '*Список покупок:*'
+      - service: notify.telegram_id_3
+        data:
+          message: '{{ states.sensor.spisok_pokupok_sensor.attributes.content }}'
+          title: '*Список покупок:*'
+    mode: single
+
+# ------------ 
+
+  - alias: Поляна
+    description: ''
+    trigger:
+      - platform: zone
+        entity_id: device_tracker.sm_g930f
+        zone: zone.poliana
+        event: enter
+    condition:
+      - condition: state
+        entity_id: sensor.spisok_pokupok_sensor
+        state: Список полон
+    action:
+      - service: notify.telegram_id_1
+        data:
+          message: '{{ states.sensor.spisok_pokupok_sensor.attributes.content }}'
+          title: '*Список покупок:*'
+    mode: single
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -279,12 +279,12 @@ family_home:
         default: []
     mode: single
 
-# ------------ device_tracker
-  - alias: Трекер Ляли
+# ------------ device_tracker ping
+  - alias: Трекер Ляли wifi
     description: ''
     trigger:
       - platform: state
-        entity_id: device_tracker.ping_admin, device_tracker.sm_n910c
+        entity_id: device_tracker.ping_admin
     condition: []
     action:
       - choose:
@@ -306,6 +306,18 @@ family_home:
               - service: input_boolean.turn_on
                 target:
                   entity_id: input_boolean.virt_wifi_admin
+        default: []
+    mode: single
+
+# ------------ device_tracker gps
+  - alias: Трекер Ляли gps
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: device_tracker.sm_n910c
+    condition: []
+    action:
+      - choose:
           - conditions:
               - condition: state
                 entity_id: device_tracker.sm_n910c
@@ -366,12 +378,12 @@ family_home:
         default: []
     mode: single
 
-# ------------ device_tracker
-  - alias: Трекер Влада
+# ------------ device_tracker ping
+  - alias: Трекер Влада wifi
     description: ''
     trigger:
       - platform: state
-        entity_id: device_tracker.ping_vlad, device_tracker.sm_g930f
+        entity_id: device_tracker.ping_vlad
     condition: []
     action:
       - choose:
@@ -393,6 +405,18 @@ family_home:
               - service: input_boolean.turn_on
                 target:
                   entity_id: input_boolean.virt_wifi_vlad
+        default: []
+    mode: single
+
+# ------------ device_tracker gps
+  - alias: Трекер Влада gps
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: device_tracker.sm_g930f
+    condition: []
+    action:
+      - choose:
           - conditions:
               - condition: state
                 entity_id: device_tracker.sm_g930f
@@ -453,12 +477,12 @@ family_home:
         default: []
     mode: single
 
-# ------------ device_tracker
-  - alias: Трекер Ени
+# ------------ device_tracker ping
+  - alias: Трекер Ени wifi
     description: ''
     trigger:
       - platform: state
-        entity_id: device_tracker.ping_enia, device_tracker.sm_n985f
+        entity_id: device_tracker.ping_enia
     condition: []
     action:
       - choose:
@@ -480,6 +504,18 @@ family_home:
               - service: input_boolean.turn_on
                 target:
                   entity_id: input_boolean.virt_wifi_enay
+        default: []
+    mode: single
+
+# ------------ device_tracker gps
+  - alias: Трекер Ени gps
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: device_tracker.sm_n985f
+    condition: []
+    action:
+      - choose:
           - conditions:
               - condition: state
                 entity_id: device_tracker.sm_n985f
@@ -492,7 +528,7 @@ family_home:
               - condition: or
                 conditions:
                   - condition: state
-                    entity_id: device_tracker.sm_n985f
+                    entity_id: ddevice_tracker.sm_n985f
                     state: 'home'
             sequence:
               - service: input_boolean.turn_on

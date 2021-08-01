@@ -1,1 +1,529 @@
+# /.homeassistant/includes/packages/family/family.yaml
+
+
+family_home:
+
+# ##############################################################################
+# Виртуальная группа
+# ##############################################################################
+# ------------ https://www.youtube.com/watch?v=firuRxAtHBA&t=8s
+  input_boolean:
+    virt_treker_vlad:
+      name: Вирт трекер Влад
+      icon: mdi:account-check-outline
+
+# ------------ 
+    virt_treker_enay:
+      name: Вирт трекер Еня
+      icon: mdi:account-check-outline
+
+# ------------ 
+    virt_treker_admin:
+      name: Вирт трекер Лялюля
+      icon: mdi:account-check-outline
+
+# ------------ 
+    virt_group_persons:
+      name: Вирт группа присутствия
+      icon: mdi:account-group-outline
+
+
+# ------------ 
+    virt_wifi_vlad:
+      name: WIFI Влад
+      icon: mdi:cellphone-wireless
+
+# ------------ 
+    virt_gps_vlad:
+      name: GPS Влад
+      icon: mdi:crosshairs-gps
+
+# ------------ 
+    virt_wifi_enay:
+      name: WIFI Еня
+      icon: mdi:cellphone-wireless
+
+# ------------ 
+    virt_gps_enay:
+      name: GPS Еня
+      icon: mdi:crosshairs-gps
+
+# ------------ 
+    virt_wifi_admin:
+      name: WIFI Лялюля
+      icon: mdi:cellphone-wireless
+
+# ------------ 
+    virt_gps_admin:
+      name: GPS Лялюля
+      icon: mdi:crosshairs-gps
+
+
+
+  binary_sensor:
+
+  - platform: template
+    sensors:
+# ---------------- 
+      family_home:
+        friendly_name: Family Home
+        device_class: presence
+        value_template: "{{ states('sensor.time') and (is_state('person.admin','home') or is_state('person.enia','home') or is_state('person.vlad','home')) }}"
+
+# ---------------- 
+      somebody_home_ping:
+        friendly_name: Somebody At Home by Ping
+        value_template: >
+          {{ 
+            is_state('device_tracker.ping_admin', 'home') 
+            or is_state('device_tracker.ping_vlad', 'home')
+            or is_state('device_tracker.ping_enia', 'home')
+          }}
+        icon_template: mdi:phone-voip
+
+
+  sensor:
+  - platform: template
+    sensors:
+# ############################################################################
+# Template sensors
+# ############################################################################
+      home_status:
+        friendly_name: Home Occupation
+        #device_class: presence
+        value_template: >
+          {% if states('binary_sensor.family_home') == "on" %}
+          Occupied
+          {% else %}
+          Empty
+          {% endif %}
+        icon_template: >
+          {% if states('binary_sensor.family_home') == "on" %}
+          mdi:home-account
+          {% else %}
+          mdi:home-outline
+          {% endif %}
+
+# ############################################################################
+# Last motion sensors
+# ############################################################################
+      people_home:                  #/.homeassistant/groups.yaml
+        friendly_name: Persons At Home
+        value_template: "{{ expand('group.persons') | map(attribute='state') | select('eq','home')| list | length }}"
+        unit_of_measurement: 'e'
+        icon_template: mdi:account-group
+
+
+
+  automation:
+
+# ---------------- person_telegramm
+  - alias: 'Home Presence Alert'
+    initial_state: true
+    trigger:
+      platform: state
+      entity_id: person.admin, person.enia, person.vlad
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
+    action:
+      - service: notify.telegram_id_1
+        data_template:
+          message: >
+            {{ trigger.to_state.attributes.friendly_name }}
+            {% if trigger.to_state.state == 'home' %}дома!
+            {% else %}скорее всего вне дома.
+            {% endif %}
+      - service: notify.telegram_id_2
+        data_template:
+          message: >
+            {{ trigger.to_state.attributes.friendly_name }}
+            {% if trigger.to_state.state == 'home' %}дома!
+            {% else %}скорее всего вне дома.
+            {% endif %}
+      - service: notify.telegram_id_3
+        data_template:
+          message: >
+            {{ trigger.to_state.attributes.friendly_name }}
+            {% if trigger.to_state.state == 'home' %}дома!
+            {% else %}скорее всего вне дома.
+            {% endif %}
+
+  - alias: 'Telegram Bot - Who is home?'
+    trigger:
+      platform: event
+      event_type: telegram_command
+      event_data: 
+        command: '/home'    #whoishome
+    action:
+      service: telegram_bot.send_message
+      data_template:
+        target: '{{ trigger.event.data.user_id }}'
+        message: |
+          Сейчас дома:
+          {%- set entites = expand('group.family_persons') %}{% for prs in entites %}{% if prs.state == "home" %}
+          {{ prs.attributes.friendly_name }}{% endif %}{% endfor %}
+          {% if is_state("group.family_persons", "not_home") %}Никого нет{% endif %}
+
+
+# ------------ Приветствие когда пришел домой
+  - alias: greeting_when_i_came_home
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: person.admin
+        from: 'not_home'
+        to: 'home'
+        for:
+          minutes: 1
+    condition:
+      - condition: state
+        entity_id: binary_sensor.tod_long_day
+        state: 'on'
+
+    action:
+      - service: media_player.volume_set
+        data:
+          entity_id: !secret media_player_yandex_station
+          volume_level:  '{{states("input_number.main_volume_door_open")|float}}'
+      - service: tts.yandex_station_say
+        data: 
+          entity_id: !secret media_player_yandex_station
+          message: "Пр+иветст+вую те+бя до+ма!"
+
+# ##############################################################################
+# Виртуальная группа
+# ##############################################################################
+# ------------ input_boolean
+  - alias: Вирт группа
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: input_boolean.virt_treker_admin, input_boolean.virt_treker_vlad, input_boolean.virt_treker_enay
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.virt_treker_admin
+                state: 'off'
+              - condition: state
+                state: 'off'
+                entity_id: input_boolean.virt_treker_vlad
+              - condition: state
+                state: 'off'
+                entity_id: input_boolean.virt_treker_enay
+
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_group_persons
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.virt_treker_admin
+                    state: 'on'
+                  - condition: state
+                    entity_id: input_boolean.virt_treker_vlad
+                    state: 'on'
+                  - condition: state
+                    entity_id: input_boolean.virt_treker_enay
+                    state: 'on'
+
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_group_persons
+        default: []
+    mode: single
+
+# ##############################################################################
+# Виртуальный трекер Ляли
+# ##############################################################################
+# ------------ input_boolean
+  - alias: Вирт трекер Ляли
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: input_boolean.virt_wifi_admin, input_boolean.virt_gps_admin
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.virt_wifi_admin
+                state: 'off'
+              - condition: state
+                state: 'off'
+                entity_id: input_boolean.virt_gps_admin
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_treker_admin
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.virt_wifi_admin
+                    state: 'on'
+                  - condition: state
+                    entity_id: input_boolean.virt_gps_admin
+                    state: 'on'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_treker_admin
+        default: []
+    mode: single
+
+# ------------ device_tracker
+  - alias: Трекер Ляли
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: device_tracker.ping_admin, device_tracker.sm_n910c
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: device_tracker.ping_admin
+                state: 'not_home'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_wifi_admin
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: device_tracker.ping_admin
+                    state: 'home'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_wifi_admin
+          - conditions:
+              - condition: state
+                entity_id: device_tracker.sm_n910c
+                state: 'not_home'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_gps_admin
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: device_tracker.sm_n910c
+                    state: 'home'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_gps_admin
+        default: []
+    mode: single
+
+# ##############################################################################
+# Виртуальный трекер Влада
+# ##############################################################################
+# ------------ input_boolean
+  - alias: Вирт трекер Влада
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: input_boolean.virt_wifi_vlad, input_boolean.virt_gps_vlad
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.virt_wifi_vlad
+                state: 'off'
+              - condition: state
+                state: 'off'
+                entity_id: input_boolean.virt_gps_vlad
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_treker_vlad
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.virt_wifi_vlad
+                    state: 'on'
+                  - condition: state
+                    entity_id: input_boolean.virt_gps_vlad
+                    state: 'on'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_treker_vlad
+        default: []
+    mode: single
+
+# ------------ device_tracker
+  - alias: Трекер Влада
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: device_tracker.ping_vlad, device_tracker.sm_g930f
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: device_tracker.ping_vlad
+                state: 'not_home'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_wifi_vlad
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: device_tracker.ping_vlad
+                    state: 'home'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_wifi_vlad
+          - conditions:
+              - condition: state
+                entity_id: device_tracker.sm_g930f
+                state: 'not_home'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_gps_vlad
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: device_tracker.sm_g930f
+                    state: 'home'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_gps_vlad
+        default: []
+    mode: single
+
+# ##############################################################################
+# Виртуальный трекер Ени
+# ##############################################################################
+# ------------ input_boolean
+  - alias: Вирт трекер Ени
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: input_boolean.virt_wifi_enay, input_boolean.virt_gps_enay
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: input_boolean.virt_wifi_enay
+                state: 'off'
+              - condition: state
+                state: 'off'
+                entity_id: input_boolean.virt_gps_enay
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_treker_enay
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: input_boolean.virt_wifi_enay
+                    state: 'on'
+                  - condition: state
+                    entity_id: input_boolean.virt_gps_enay
+                    state: 'on'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_treker_enay
+        default: []
+    mode: single
+
+# ------------ device_tracker
+  - alias: Трекер Ени
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: device_tracker.ping_enia, device_tracker.sm_n985f
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: device_tracker.ping_enia
+                state: 'not_home'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_wifi_enay
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: device_tracker.ping_enia
+                    state: 'home'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_wifi_enay
+          - conditions:
+              - condition: state
+                entity_id: device_tracker.sm_n985f
+                state: 'not_home'
+            sequence:
+              - service: input_boolean.turn_off
+                target:
+                  entity_id: input_boolean.virt_gps_enay
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: device_tracker.sm_n985f
+                    state: 'home'
+            sequence:
+              - service: input_boolean.turn_on
+                target:
+                  entity_id: input_boolean.virt_gps_enay
+        default: []
+    mode: single
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

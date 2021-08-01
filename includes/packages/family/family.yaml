@@ -528,7 +528,7 @@ family_home:
               - condition: or
                 conditions:
                   - condition: state
-                    entity_id: ddevice_tracker.sm_n985f
+                    entity_id: device_tracker.sm_n985f
                     state: 'home'
             sequence:
               - service: input_boolean.turn_on

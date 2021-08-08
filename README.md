@@ -25,7 +25,7 @@
   - Mi Smart Home Hub (ZNDMWG02LM, Zigbee 3.0/Bluetooth (BLE Mesh) 5.0/Wi-Fi 2.4GHz)
 
 - **Zigbee Devices:**
-  - Sonoff Temperature and Humidity Sensor (SNZB-02, CR2032)
+  - Sonoff Temperature and Humidity Sensor (SNZB-02, CR2450)
   - Sonoff Wireless Door and Window Sensor (SNZB-04, CR2032)
   - Sonoff ZB MINI
   - Aqara Vibration Sensor (DJT11LM, CR2032)

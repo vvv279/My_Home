@@ -97,7 +97,7 @@
   * [lovelace-layout-card](https://github.com/thomasloven/lovelace-layout-card)
   * [MorphNumbers](https://github.com/AlexxIT/MorphNumbers)
   * [hass-yandex-music-browser](https://github.com/alryaz/hass-yandex-music-browser)
-
+  * [hass-moscow-pgu](https://github.com/alryaz/hass-moscow-pgu)
 
 
 

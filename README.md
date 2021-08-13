@@ -96,7 +96,7 @@
   * [lovelace-fold-entity-row](https://github.com/thomasloven/lovelace-fold-entity-row)
   * [lovelace-layout-card](https://github.com/thomasloven/lovelace-layout-card)
   * [MorphNumbers](https://github.com/AlexxIT/MorphNumbers)
-
+  * [hass-yandex-music-browser](https://github.com/alryaz/hass-yandex-music-browser)
 
 
 

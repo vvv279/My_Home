@@ -100,8 +100,7 @@
   * [hass-moscow-pgu](https://github.com/alryaz/hass-moscow-pgu)
   * [SamsungTV Tizen](https://github.com/jaruba/ha-samsungtv-tizen)
   * [button-card](https://github.com/custom-cards/button-card)
-
-
+  * [timer-bar-card](timer-bar-card)
 
 
 

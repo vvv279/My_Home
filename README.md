@@ -104,4 +104,16 @@
   * [hass-node-red](https://github.com/zachowj/hass-node-red)
   * [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod)
   * [ha-gismeteo](https://github.com/Limych/ha-gismeteo)
+ * [simple-weather-card](https://github.com/kalkih/simple-weather-card)
+
+
+
+
+
+
+
+
+
+
+
 

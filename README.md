@@ -18,8 +18,8 @@
 
 - **Программное обеспечение:** 
 
-  - Ubuntu Linux 20.04.2 LTS
-  - Home Assistant core
+  - [Ubuntu Linux 20.04.2 LTS](https://releases.ubuntu.com/20.04/)
+  - [Home Assistant core](https://www.home-assistant.io/installation/linux#install-home-assistant-core)
 
 - **Hub Devices:**
   - Mi Smart Home Hub (ZNDMWG02LM, Zigbee 3.0/Bluetooth (BLE Mesh) 5.0/Wi-Fi 2.4GHz)

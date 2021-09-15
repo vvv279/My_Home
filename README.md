@@ -23,7 +23,7 @@
   - [HACS](https://hacs.xyz/)
 
 ## Devices
-- **Hub Devices:**
+- **Hub:**
   - Mi Smart Home Hub (ZNDMWG02LM, Zigbee 3.0/Bluetooth (BLE Mesh) 5.0/Wi-Fi 2.4GHz)
 
 - **Zigbee:**

@@ -165,25 +165,61 @@
 <details><summary>Home Assistant:</summary>
 <p>
 
+1. Обновляем систему до актуального состояния
+```shell
+sudo apt-get update
+```
+```shell
+sudo apt-get upgrade -y
+```
+2. После обновления системы устанавливаем необходимые компоненты и зависимости. 
+  
 
+  
+  
+  
+</p>
+</details>   
+<details><summary>HACS:</summary>
+<p>
+
+1. Сначала нам надо создать новую папку для кастомных компонентов
+```shell
+cd /home/homeassistant/.homeassistant/
+```
+```shell
+sudo mkdir custom_components
+```
+```shell
+sudo chmod 777 custom_components/
+```
+
+2. Устанавливаем unzip, потому что его нет в штатной поставке Ubuntu
+```shell
+sudo apt install unzip
+```
+
+3. Запускаем скрипт установки
+```shell
+wget -q -O - https://install.hacs.xyz | bash -
+```
+
+3. 1 Установка должна завершиться надписью "Installation completed".
+```shell
+INFO: Creating HACS directory...
+INFO: Unpacking HACS...
+INFO: Removing HACS zip file...
+INFO: Installation complete.
+```
+  
+4. Перезагружаем систему
+```shell
+su reboot
+```
 
   
-  
- </p>
-</details> 
-  
-  
-  
- <details><summary>HACS:</summary>
-<p> 
-  
-  
- </p>
-</details> 
-  
-  
-  
-  
+</p>
+</details>   
   
   
   

@@ -291,6 +291,9 @@ Ctrl+X
 ```shell
 su reboot
 ```  
+
+</p>
+</details> 
   
 <details><summary>Обновление Home Assistant:</summary>
 <p>
@@ -321,14 +324,8 @@ su reboot
 ```
 </p>
 </details>
-  
-  
-  
-  
-  
-  
-</p>
-</details>
+ 
+
 
 <details><summary>HACS:</summary>
 <p>

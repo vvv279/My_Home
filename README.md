@@ -56,7 +56,7 @@
   * [Samsung Smart TV](https://www.home-assistant.io/integrations/samsungtv)
   * [Speedtest.net](https://www.home-assistant.io/integrations/speedtestdotnet)
   * [UPnP/IGD](https://www.home-assistant.io/integrations/upnp)
-  * [Zigbee Home Automation](https://www.home-assistant.io/integrations/zha)
+
   * [Local IP Address](https://www.home-assistant.io/integrations/local_ip)
   * [Mobile App](https://www.home-assistant.io/integrations/mobile_app)
   * [Shopping List](https://www.home-assistant.io/integrations/shopping_list)

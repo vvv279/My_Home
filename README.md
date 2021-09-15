@@ -179,7 +179,8 @@ sudo apt-get upgrade -y
   
   
 </p>
-</details>   
+</details>
+
 <details><summary>HACS:</summary>
 <p>
 
@@ -224,7 +225,73 @@ su reboot
   
   
   
-  
-  
-  
 
+
+
+
+
+
+<details><summary>Получаем сертификат HTTPS:</summary>
+<p>
+
+1. Теперь нам необходимо поставить пакет для запроса и получения ssl сертификата
+```shell
+sudo apt-get install certbot
+```
+
+2. Получаем сертификат ХХХХХХХХХ-водим свои данные
+```shell
+sudo certbot certonly --standalone --email ХХХХХХХХХ@gmail.com  -d ХХХХХХХХХ.asuscomm.com
+```
+
+2.1 Если все сделано правильно, вывод команды будет примерно такой
+```shell
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator standalone, Installer None
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for your.domain.org
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations<span class="cm-variable-2"></span><span class="cm-variable-2"></span><span class="cm-variable-2"></span><span class="cm-variable-2"></span>! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/your.domain.org/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/your.domain.org/privkey.pem
+   Your cert will expire on 2019-02-19. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - If<span class="cm-variable-2"></span><span class="cm-variable-2"></span><span class="cm-variable-2"></span><span class="cm-variable-2"></span> you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+```
+
+3. Теперь нам необходимо копировать полученные сертификаты в папку настроек HA. Делаем следующее
+```shell
+cd /home/homeassistant/.homeassistant/
+```
+```shell
+sudo cp /etc/letsencrypt/live/ХХХХХХХХХ.asuscomm.com/fullchain.pem fullchain.pem
+```
+```shell
+sudo cp /etc/letsencrypt/live/ХХХХХХХХХ.asuscomm.com/privkey.pem privkey.pem
+```
+```shell
+sudo chown -R homeassistant:homeassistant /home/homeassistant/.homeassistant/
+```
+
+4. После открываем файл configuration.yaml вашего HA удобным для вас способом и в разделе http: прописываем следующее
+```yaml
+http:
+  ssl_certificate: /home/homeassistant/.homeassistant/fullchain.pem
+  ssl_key: /home/homeassistant/.homeassistant/privkey.pem
+```
+
+
+
+
+</p>
+</details> 

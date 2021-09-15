@@ -1,0 +1,1361 @@
+title: My Sweet Home
+views:
+  - title: Главная
+    id: main
+    icon: mdi:home-assistant
+    theme: dark_orange
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:simple-weather-card
+            entity: weather.moskva
+            name: Москва
+            custom:
+              - temp: sensor.openweathermap_temperature_ul
+              - humidity: sensor.gismeteo_humidit
+          - type: glance
+            entities:
+              - entity: person.vlad
+                name: Влад
+              - entity: person.enia
+                name: Еня
+              - entity: person.vvv
+                name: Лялюля
+              - entity: person.vova
+                name: Вова
+            state_color: true
+          - type: grid
+            title: Зал
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: switch.sonoff_10010fb187
+                name: Основной
+                icon: mdi:ceiling-light
+                template: light_button
+              - type: custom:button-card
+                entity: binary_sensor.sonoff_ds01_3439ab23_vn_contact
+                name: Окно
+                icon: mdi:window-open-variant
+                template: light_button_sensor
+              - type: custom:button-card
+                entity: binary_sensor.sonoff_ds01_3439ab23_vn_contact
+                name: Дверь
+                template: light_button_sensor
+          - type: grid
+            title: Спальня
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: switch.sonoff_10010eecd0
+                name: Основной
+                icon: mdi:ceiling-light
+                template: light_button
+              - type: custom:button-card
+                entity: binary_sensor.sonoff_ds01_3439ab23_vn_contact
+                name: Окно
+                icon: mdi:window-open-variant
+                template: light_button_sensor
+              - type: custom:button-card
+                entity: binary_sensor.sonoff_ds01_3439ab23_vn_contact
+                name: Дверь
+                template: light_button_sensor
+          - type: grid
+            title: Думаем
+            columns: 3
+            square: false
+            cards:
+              - type: custom:slider-button-card
+                entity: media_player.samsung_tv_remote
+                slider:
+                  direction: left-right
+                  background: triangle
+                  show_track: true
+                icon:
+                  tap_action:
+                    action: more-info
+                  icon: ''
+                action_button:
+                  mode: custom
+                  icon: mdi:play-pause
+                  tap_action:
+                    action: call-service
+                    service: media_player.media_play_pause
+                    service_data:
+                      entity_id: media_player.samsung_tv_remote
+                  show_spinner: false
+                  show: true
+                name: ТВ
+              - type: custom:slider-button-card
+                entity: media_player.yandex_station_ХХХХХХeХХХХcХХХeХХХХ
+                slider:
+                  direction: left-right
+                  background: triangle
+                  show_track: true
+                icon:
+                  tap_action:
+                    action: more-info
+                  icon: ''
+                action_button:
+                  mode: custom
+                  icon: mdi:play-pause
+                  tap_action:
+                    action: call-service
+                    service: media_player.media_play_pause
+                    service_data:
+                      entity_id: media_player.yandex_station_ХХХХХХeХХХХcХХХeХХХХ
+                  show_spinner: false
+                  show: true
+                name: Алиса
+              - type: custom:slider-button-card
+                entity: switch.sonoff_10010fb187
+                slider:
+                  direction: left-right
+                  background: custom
+                  toggle_on_click: true
+                  force_square: true
+                  show_track: false
+                  use_percentage_bg_opacity: false
+                  use_state_color: true
+                icon:
+                  use_state_color: true
+                  tap_action:
+                    action: more-info
+                  show: true
+                action_button:
+                  tap_action:
+                    action: toggle
+                  mode: custom
+                  show_spinner: true
+                  show: true
+                name: Основной
+                show_state: true
+                compact: false
+          - type: grid
+            title: Кухня
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: switch.sonoff_10010e877e
+                name: Основной
+                icon: mdi:ceiling-light
+                template: light_button
+              - type: custom:button-card
+                entity: binary_sensor.sonoff_ds01_3439ab23_vn_contact
+                name: Окно
+                icon: mdi:window-open-variant
+                template: light_button_sensor
+          - type: grid
+            title: Коридор
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: light.sonoff_a48001350d
+                name: Основной
+                icon: mdi:ceiling-light
+                template: light_button
+              - type: custom:button-card
+                entity: binary_sensor.sonoff_ds01_contact
+                name: Дверь
+                template: light_button_sensor
+              - type: custom:button-card
+                entity: binary_sensor.agara_vibration_kor_action
+                name: Вибрация
+                icon: mdi:vibrate
+                template: light_button_sensor
+              - type: custom:button-card
+                color_type: icon
+                entity: sensor.agara_lumi_kor_luminance
+                label: |
+                  [[[
+                    var bri = states['sensor.agara_lumi_kor_luminance'].state;
+                    return '' + (bri ? bri : '0') + '';
+                  ]]]
+                show_label: true
+                template: light_button_sensor
+          - type: grid
+            title: Ванная
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: light.sonoff_01minizb_5d70bbfe_vn
+                name: Основной
+                icon: mdi:ceiling-light
+                template: light_button_sensor
+              - type: custom:button-card
+                entity: binary_sensor.sonoff_ds01_3439ab23_vn_contact
+                name: Дверь
+                template: light_button_sensor
+              - type: custom:button-card
+                entity: switch.sonoff_10010f89a2
+                name: Вентиляция
+                icon: mdi:fan
+                template: light_button
+          - type: grid
+            title: Думаем 1
+            columns: 3
+            square: false
+            cards:
+              - type: custom:slider-button-card
+                entity: switch.sonoff_10010f89a2
+                slider:
+                  direction: left-right
+                  background: triangle
+                  show_track: true
+                icon:
+                  tap_action:
+                    action: more-info
+                  show: true
+                  icon: mdi:fan
+                action_button:
+                  tap_action:
+                    action: toggle
+                  mode: custom
+                  icon: ''
+                name: Вентиляция
+                show_state: true
+  - title: Медиа
+    id: media
+    icon: mdi:cast-audio
+    theme: dark_orange
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:mini-media-player
+            artwork: full-cover
+            entity: media_player.yandex_station_ХХХХХХeХХХХcХХХeХХХХ
+            shortcuts:
+              attribute: sound_mode
+              buttons:
+                - icon: mdi:account-voice
+                  id: Произнеси текст
+                  type: sound_mode
+                - icon: mdi:google-assistant
+                  id: Выполни команду
+                  type: sound_mode
+                - icon: mdi:playlist-star
+                  id: включи мою любимую музыку вперемешку
+                  type: command
+                - icon: mdi:playlist-music
+                  id: включи плейлист дня
+                  type: command
+                - icon: mdi:heart
+                  id: лайк
+                  type: command
+                - icon: mdi:radio-fm
+                  id: включи Вести ФМ
+                  type: command
+              columns: 6
+            hide:
+              power: true
+            tts:
+              platform: yandex_station
+          - type: media-control
+            entity: media_player.samsung_tv_remote
+  - icon: hass:power-socket-de
+    title: power
+    path: power
+    theme: dark_orange
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: grid
+            title: Зал
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: switch.printer
+                name: Принтер
+                icon: hass:power-socket-de
+                template: light_button
+              - type: custom:button-card
+                entity: switch.server
+                name: Сервер
+                icon: hass:power-socket-de
+                template: light_button
+              - type: custom:button-card
+                entity: switch.pc_100121558b
+                name: На
+                icon: hass:power-socket-de
+                template: light_button
+          - type: grid
+            title: Спальня
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: switch.telek
+                name: Телек
+                icon: hass:power-socket-de
+                template: light_button
+          - type: grid
+            title: Коридор
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: switch.utiug
+                name: Утюг
+                icon: hass:power-socket-de
+                template: light_button
+          - type: grid
+            title: Ванная
+            columns: 4
+            square: false
+            cards:
+              - type: custom:button-card
+                entity: switch.sushka
+                name: Стирка
+                icon: hass:power-socket-de
+                template: light_button
+  - title: Датчики
+    id: sensors
+    icon: mdi:weather-hazy
+    theme: dark_orange
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:mini-graph-card
+                name: Температура
+                unit: С°
+                entities:
+                  - entity: sensor.agara_t_zal_temperature
+                    name: Зал
+                    color: green
+                  - entity: sensor.sonoff_a48001287c_temperature_kuh
+                    name: Кухня
+                  - entity: sensor.sonoff_a4800110d3_temperature_sp
+                    name: Спальня
+                  - entity: sensor.sonoff_ec9cac23_temperature_vn
+                    name: Ванная
+                hours_to_show: 48
+                points_per_hour: 1
+              - type: custom:mini-graph-card
+                name: Влажность
+                unit: '%'
+                entities:
+                  - entity: sensor.agara_t_zal_humidity
+                    name: Зал
+                    color: green
+                  - entity: sensor.sonoff_a48001287c_humidity_kuh
+                    name: Кухня
+                  - entity: sensor.sonoff_a4800110d3_humidity_sp
+                    name: Спальня
+                  - entity: sensor.sonoff_ec9cac23_humidity_vn
+                    name: Ванная
+                hours_to_show: 48
+                points_per_hour: 1
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.agara_t_zal_pressure_mmhg
+                name: Давление
+                color_thresholds:
+                  - value: 1013
+                    color: '#4bf01f'
+                  - value: 980
+                    color: '#5586fa'
+                  - value: 1100
+                    color: '#c0392b'
+                show:
+                  labels: true
+                hours_to_show: 48
+                points_per_hour: 1
+          - type: custom:apexcharts-card
+            graph_span: 1d
+            all_series_config:
+              stroke_width: 3
+              curve: smooth
+              extend_to_end: false
+              show:
+                extremas: true
+            now:
+              show: true
+              color: red
+              label: Now
+            span:
+              start: day
+            header:
+              show: true
+              show_states: true
+              colorize_states: true
+            apex_config:
+              chart:
+                height: auto
+              tooltip:
+                enabled: true
+              grid:
+                show: false
+              fill:
+                type: gradient
+                gradient:
+                  type: vertical
+                  shadeIntensity: 0.8
+                  inverseColors: false
+                  opacityFrom: 0.5
+                  opacityTo: 0
+                  stops:
+                    - - 0
+                      - 50
+                      - 100
+              xaxis:
+                axisBorder:
+                  show: false
+                labels:
+                  style:
+                    fontSize: 14px
+                    fontFamily: Raleway
+              yaxis:
+                - show: true
+                  decimalsInFloat: 0
+                  min: 0
+                  max: 50
+                  labels:
+                    style:
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+              legend:
+                show: false
+              dataLabels:
+                enabled: false
+            series:
+              - entity: sensor.temperature_average
+                type: area
+                name: Средняя температура дома
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 60min
+                  func: avg
+              - entity: sensor.temperature_average
+                name: Средняя температура дома вчера
+                type: area
+                color: grey
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 60min
+                  func: avg
+                offset: '-1d'
+          - type: custom:apexcharts-card
+            graph_span: 1d
+            all_series_config:
+              stroke_width: 3
+              curve: smooth
+              extend_to_end: false
+              show:
+                extremas: true
+            now:
+              show: true
+              color: red
+              label: Now
+            span:
+              start: day
+            header:
+              show: true
+              show_states: true
+              colorize_states: true
+            apex_config:
+              chart:
+                height: auto
+              tooltip:
+                enabled: true
+              grid:
+                show: false
+              fill:
+                type: gradient
+                gradient:
+                  type: vertical
+                  shadeIntensity: 0.8
+                  inverseColors: false
+                  opacityFrom: 0.5
+                  opacityTo: 0
+                  stops:
+                    - - 0
+                      - 50
+                      - 100
+              xaxis:
+                axisBorder:
+                  show: false
+                labels:
+                  style:
+                    fontSize: 14px
+                    fontFamily: Raleway
+              yaxis:
+                - show: true
+                  decimalsInFloat: 0
+                  min: 0
+                  max: 100
+                  labels:
+                    style:
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+              legend:
+                show: false
+              dataLabels:
+                enabled: false
+            series:
+              - entity: sensor.humidity_average
+                type: area
+                name: Средняя влажность дома
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 60min
+                  func: avg
+              - entity: sensor.humidity_average
+                name: Средняя влажность дома вчера
+                type: area
+                color: grey
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 60min
+                  func: avg
+                offset: '-1d'
+          - type: custom:apexcharts-card
+            header:
+              title: Зал
+              show: true
+              show_states: true
+              colorize_states: true
+            update_interval: 10min
+            graph_span: 3d
+            experimental:
+              brush: true
+            apex_config:
+              tooltip:
+                enabled: true
+              yaxis:
+                - show: true
+                  decimalsInFloat: 0
+                  min: 18
+                  max: 30
+                  labels:
+                    style:
+                      colors: '#c0392b'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+                - show: true
+                  decimalsInFloat: 0
+                  min: 30
+                  max: 70
+                  opposite: true
+                  labels:
+                    style:
+                      colors: '#5586fa'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+              xaxis:
+                axisBorder:
+                  show: false
+                labels:
+                  style:
+                    fontSize: 14px
+                    fontFamily: Raleway
+              chart:
+                height: auto
+              grid:
+                show: false
+              legend:
+                show: false
+              dataLabels:
+                enabled: false
+              stroke:
+                width: 3
+                curve: smooth
+              fill:
+                type: gradient
+                gradient:
+                  type: vertical
+                  shadeIntensity: 0.8
+                  inverseColors: false
+                  opacityFrom: 0.5
+                  opacityTo: 0
+                  stops:
+                    - - 0
+                      - 50
+                      - 100
+            series:
+              - entity: sensor.agara_t_zal_temperature
+                name: Температура
+                show:
+                  extremas: true
+                  in_brush: true
+                  in_chart: true
+                type: area
+                color: '#c0392b'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+              - entity: sensor.agara_t_zal_humidity
+                name: Влажность
+                type: area
+                color: '#5586fa'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+                show:
+                  in_brush: true
+          - type: custom:apexcharts-card
+            header:
+              title: Спальня
+              show: true
+              show_states: true
+              colorize_states: true
+            update_interval: 10min
+            graph_span: 3d
+            experimental:
+              brush: true
+            apex_config:
+              tooltip:
+                enabled: true
+              yaxis:
+                - show: true
+                  decimalsInFloat: 0
+                  min: 18
+                  max: 30
+                  labels:
+                    style:
+                      colors: '#c0392b'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+                - show: true
+                  decimalsInFloat: 0
+                  min: 30
+                  max: 70
+                  opposite: true
+                  labels:
+                    style:
+                      colors: '#5586fa'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+              xaxis:
+                axisBorder:
+                  show: false
+                labels:
+                  style:
+                    fontSize: 14px
+                    fontFamily: Raleway
+              chart:
+                height: auto
+              grid:
+                show: false
+              legend:
+                show: false
+              dataLabels:
+                enabled: false
+              stroke:
+                width: 3
+                curve: smooth
+              fill:
+                type: gradient
+                gradient:
+                  type: vertical
+                  shadeIntensity: 0.8
+                  inverseColors: false
+                  opacityFrom: 0.5
+                  opacityTo: 0
+                  stops:
+                    - - 0
+                      - 50
+                      - 100
+            series:
+              - entity: sensor.sonoff_a4800110d3_temperature_sp
+                name: Температура
+                show:
+                  extremas: true
+                  in_brush: true
+                  in_chart: true
+                type: area
+                color: '#c0392b'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+              - entity: sensor.sonoff_a4800110d3_humidity_sp
+                name: Влажность
+                type: area
+                color: '#5586fa'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+                show:
+                  in_brush: true
+          - type: custom:apexcharts-card
+            header:
+              title: Кухня
+              show: true
+              show_states: true
+              colorize_states: true
+            update_interval: 10min
+            graph_span: 3d
+            experimental:
+              brush: true
+            apex_config:
+              tooltip:
+                enabled: true
+              yaxis:
+                - show: true
+                  decimalsInFloat: 0
+                  min: 18
+                  max: 30
+                  labels:
+                    style:
+                      colors: '#c0392b'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+                - show: true
+                  decimalsInFloat: 0
+                  min: 30
+                  max: 70
+                  opposite: true
+                  labels:
+                    style:
+                      colors: '#5586fa'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+              xaxis:
+                axisBorder:
+                  show: false
+                labels:
+                  style:
+                    fontSize: 14px
+                    fontFamily: Raleway
+              chart:
+                height: auto
+              grid:
+                show: false
+              legend:
+                show: false
+              dataLabels:
+                enabled: false
+              stroke:
+                width: 3
+                curve: smooth
+              fill:
+                type: gradient
+                gradient:
+                  type: vertical
+                  shadeIntensity: 0.8
+                  inverseColors: false
+                  opacityFrom: 0.5
+                  opacityTo: 0
+                  stops:
+                    - - 0
+                      - 50
+                      - 100
+            series:
+              - entity: sensor.sonoff_a48001287c_temperature_kuh
+                name: Температура
+                show:
+                  extremas: true
+                  in_brush: true
+                  in_chart: true
+                type: area
+                color: '#c0392b'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+              - entity: sensor.agara_t_zal_humidity
+                name: Влажность
+                type: area
+                color: '#5586fa'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+                show:
+                  in_brush: true
+          - type: custom:apexcharts-card
+            header:
+              title: Ванная
+              show: true
+              show_states: true
+              colorize_states: true
+            update_interval: 10min
+            graph_span: 3d
+            experimental:
+              brush: true
+            apex_config:
+              tooltip:
+                enabled: true
+              yaxis:
+                - show: true
+                  decimalsInFloat: 0
+                  min: 18
+                  max: 30
+                  labels:
+                    style:
+                      colors: '#c0392b'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+                - show: true
+                  decimalsInFloat: 0
+                  min: 30
+                  max: 70
+                  opposite: true
+                  labels:
+                    style:
+                      colors: '#5586fa'
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+              xaxis:
+                axisBorder:
+                  show: false
+                labels:
+                  style:
+                    fontSize: 14px
+                    fontFamily: Raleway
+              chart:
+                height: auto
+              grid:
+                show: false
+              legend:
+                show: false
+              dataLabels:
+                enabled: false
+              stroke:
+                width: 3
+                curve: smooth
+              fill:
+                type: gradient
+                gradient:
+                  type: vertical
+                  shadeIntensity: 0.8
+                  inverseColors: false
+                  opacityFrom: 0.5
+                  opacityTo: 0
+                  stops:
+                    - - 0
+                      - 50
+                      - 100
+            series:
+              - entity: sensor.sonoff_ec9cac23_temperature_vn
+                name: Температура
+                show:
+                  extremas: true
+                  in_brush: true
+                  in_chart: true
+                type: area
+                color: '#c0392b'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+              - entity: sensor.sonoff_ec9cac23_humidity_vn
+                name: Влажность
+                type: area
+                color: '#5586fa'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 30min
+                  func: avg
+                show:
+                  in_brush: true
+          - type: iframe
+            url: https://embed.windy.com/embed2.html?lat=54.902&lon=8......
+            aspect_ratio: 50%
+          - type: picture-elements
+            image: /local/weather/bg/bg.png
+            elements:
+              - type: image
+                image: /local/weather/icons/visibility.png
+                style:
+                  top: 20%
+                  left: 10%
+                  transform: none
+                  width: 13%
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.moskva_condition
+                style:
+                  top: 75%
+                  left: 18%
+                  transform: translate(-50%, -50%)
+                  color: var(--secondary-text-color)
+                  font-size: 90%
+                  pointer-events: none
+              - type: image
+                image: /local/weather/icons/wind.png
+                style:
+                  top: 20%
+                  left: 45%
+                  transform: none
+                  width: 13%
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.gismeteo_bearing_speed_custom
+                style:
+                  top: 75%
+                  left: 50%
+                  transform: translate(-50%, -50%)
+                  color: var(--secondary-text-color)
+                  font-size: 90%
+                  pointer-events: none
+              - type: image
+                image: /local/weather/icons/cloudy.png
+                style:
+                  top: 20%
+                  left: 75%
+                  transform: none
+                  width: 13%
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.gismeteo_humidit
+                style:
+                  top: 75%
+                  left: 82%
+                  transform: translate(-50%, -50%)
+                  color: var(--secondary-text-color)
+                  font-size: 90%
+                  pointer-events: none
+          - type: picture-elements
+            image: /local/weather/bg/bg.png
+            elements:
+              - type: image
+                image: /local/weather/icons/sunrise.png
+                style:
+                  top: 20%
+                  left: 10%
+                  transform: none
+                  width: 13%
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.sunrise_time
+                style:
+                  top: 75%
+                  left: 16%
+                  transform: translate(-50%, -50%)
+                  color: var(--secondary-text-color)
+                  font-size: 90%
+                  pointer-events: none
+              - type: image
+                image: /local/weather/icons/sunset.png
+                style:
+                  top: 20%
+                  left: 75%
+                  transform: none
+                  width: 13%
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.sunset_time
+                style:
+                  top: 75%
+                  left: 81%
+                  transform: translate(-50%, -50%)
+                  color: var(--secondary-text-color)
+                  font-size: 90%
+                  pointer-events: none
+              - type: image
+                entity: sensor.moon
+                state_image:
+                  new_moon: /local/weather/moon/new_moon.png
+                  waxing_crescent: /local/weather/moon/waxing_crescent.png
+                  first_quarter: /local/weather/moon/first_quarter.png
+                  waxing_gibbous: /local/weather/moon/waxing_gibbous.png
+                  full_moon: /local/weather/moon/full_moon.png
+                  waning_gibbous: /local/weather/moon/waning_gibbous.png
+                  last_quarter: /local/weather/moon/last_quarter.png
+                  waning_crescent: /local/weather/moon/waning_crescent.png
+                style:
+                  top: 40%
+                  left: 50%
+                  transform: translate(-50%, -50%)
+                  width: 12%
+                  pointer-events: none
+              - type: state-label
+                entity: sensor.moon
+                style:
+                  top: 75%
+                  left: 50%
+                  transform: translate(-50%, -50%)
+                  color: var(--secondary-text-color)
+                  font-size: 90%
+                  letter-spacing: .05em
+                  pointer-events: none
+  - title: Сервер
+    id: server
+    icon: mdi:server
+    theme: dark_orange
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: glance
+            show_name: false
+            entities:
+              - entity: sensor.last_boot_custom
+              - entity: sensor.online_custom
+                icon: mdi:home-assistant
+              - entity: binary_sensor.internet_is_available
+          - type: custom:apexcharts-card
+            header:
+              show: true
+              show_states: true
+              colorize_states: true
+            update_interval: 10min
+            graph_span: 1d
+            apex_config:
+              tooltip:
+                enabled: true
+              yaxis:
+                - show: true
+                  color: '#c0392b'
+                  decimalsInFloat: 0
+                  labels:
+                    style:
+                      fontSize: 12px
+                      fontWeight: bold
+                      fontFamily: Raleway
+                  forceNiceScale: true
+              xaxis:
+                axisBorder:
+                  show: false
+                labels:
+                  style:
+                    fontSize: 14px
+                    fontFamily: Raleway
+              chart:
+                height: auto
+              grid:
+                show: false
+              legend:
+                fontSize: 12px
+                fontFamily: Raleway
+                height: 40
+              dataLabels:
+                enabled: false
+              stroke:
+                width: 2
+                curve: smooth
+              fill:
+                type: gradient
+                gradient:
+                  type: vertical
+                  shadeIntensity: 0.8
+                  inverseColors: false
+                  opacityFrom: 0.5
+                  opacityTo: 0
+                  stops:
+                    - - 0
+                      - 50
+                      - 100
+            series:
+              - entity: sensor.processor_temperature
+                name: CPU Temp
+                show:
+                  extremas: true
+                type: area
+                color: '#c0392b'
+                fill_raw: last
+                float_precision: 1
+                group_by:
+                  duration: 20min
+                  func: avg
+          - type: custom:apexcharts-card
+            chart_type: radialBar
+            series:
+              - entity: sensor.memory_use_percent
+                name: Memory use
+              - entity: sensor.disk_use_percent
+                name: Disk use
+              - entity: sensor.processor_use_percent
+                name: CPU use
+            apex_config:
+              plotOptions:
+                radialBar:
+                  offsetY: 0
+                  startAngle: 0
+                  endAngle: 270
+                  hollow:
+                    margin: 5,
+                    size: 30%
+                    background: transparent
+                  dataLabels:
+                    name:
+                      show: false
+                    value:
+                      show: false
+                  chart:
+                    height: 100
+              legend:
+                show: true
+                floating: true
+                fontSize: 16px
+                position: left
+                offsetX: 0
+                offsetY: 25
+                labels:
+                  useSeriesColors: true
+                markers:
+                  size: 0
+                itemMargin:
+                  vertical: 3
+          - type: entities
+            title: Сертификат
+            show_header_toggle: false
+            entities:
+              - sensor.ss_cert_exiry
+            state_color: true
+          - type: custom:auto-entities
+            show_empty: true
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: sensor.*battery*
+              exclude:
+                - state: '> 65.0'
+                - entity_id: sensor.*natasha_battery*
+                - entity_id: sensor.macbookpro_internal_battery_state
+  - icon: mdi:cellphone-android
+    title: phone
+    path: phone
+    theme: dark_orange
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: grid
+            columns: 1
+            square: false
+            cards:
+              - type: entities
+                title: тел Влад
+                show_header_toggle: false
+                entities:
+                  - sensor.sm_g930f_battery_level
+                  - binary_sensor.sm_g930f_is_charging
+                  - binary_sensor.sm_g930f_wifi_state
+                  - sensor.sm_g930f_phone_state
+                state_color: true
+              - type: entities
+                title: тел Ени
+                show_header_toggle: false
+                entities:
+                  - sensor.sm_n985f_battery_level
+                  - binary_sensor.sm_n985f_is_charging
+                  - binary_sensor.sm_n985f_wifi_state
+                  - sensor.sm_n985f_phone_state
+                state_color: true
+              - type: entities
+                title: тел Лялюли
+                show_header_toggle: false
+                entities:
+                  - sensor.sm_n910c_battery_level
+                  - binary_sensor.sm_n910c_is_charging
+                  - binary_sensor.sm_n910c_wifi_state
+                  - sensor.sm_n910c_phone_state
+                state_color: true
+  - title: Счетчики воды
+    id: counters
+    icon: mdi:water-pump
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Фильтр воды
+            show_header_toggle: false
+            entities:
+              - sensor.drink_water_daily_single
+              - type: divider
+              - sensor.drink_water_yesterday
+              - type: divider
+              - sensor.drink_water_monthly_single
+              - type: divider
+              - sensor.drink_water_yearly_single
+          - type: entities
+            title: Контроль счетчика воды
+            show_header_toggle: false
+            entities:
+              - sensor.drink_water_drink_filter
+              - switch.restart_drink_filter
+              - binary_sensor.state_drink_filter
+              - sensor.status_drink_filter
+              - sensor.uptime_drink_filter_new
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:simple-thermostat
+            name: Conditioner
+            entity: climate.conder
+            layout:
+              step: row
+            hide:
+              state: true
+            header: false
+            sensors:
+              - entity: sensor.conder_fan_speed
+                name: Скорость
+            control:
+              hvac:
+                _name: Режимы
+                auto:
+                  name: false
+                heat:
+                  name: false
+                cool:
+                  name: false
+                dry:
+                  name: false
+                fan_only:
+                  name: false
+                'off':
+                  name: false
+              swing:
+                _name: Шторки
+                ud:
+                  icon: mdi:arrow-up-down
+                  name: false
+                lr:
+                  icon: mdi:arrow-left-right
+                  name: false
+                all:
+                  icon: mdi:arrow-expand-all
+                  name: false
+                'off':
+                  name: false
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: switch.conder_health
+                name: Health mode
+                state_color: true
+                secondary_info: last-changed
+              - entity: switch.conder_quiet
+                name: Quiet mode
+                state_color: true
+                secondary_info: last-changed
+button_card_templates:
+  light_button:
+    hold_action:
+      action: more-info
+    label: >
+      [[[ var bri = Math.round(entity.attributes.brightness / 2.55);  if
+      (entity.state === 'on') return (bri ? (bri+"%") : '') ]]]
+    layout: icon_label
+    show_label: true
+    show_name: true
+    state:
+      - styles:
+          card:
+            - box-shadow: '0px 0px 10px 3px #1872F2'
+          icon:
+            - color: '#1872F2'
+        value: 'on'
+    styles:
+      card:
+        - width: 86px
+        - height: 86px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+        - '--paper-card-background-color': rgba(40, 40, 40, 0.7)
+      grid:
+        - grid-template-rows: 42px auto 0px
+        - grid-template-columns: 42px auto
+      icon:
+        - width: 30px
+        - color: white
+      label:
+        - font-size: 12px
+        - font-weight: bold
+        - color: white
+      name:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 11px
+        - font-weight: bold
+        - color: white
+    tap_action:
+      action: toggle
+  light_button_sensor:
+    hold_action:
+      action: more-info
+    label: >
+      [[[ var bri = Math.round(entity.attributes.brightness / 2.55);  if
+      (entity.state === 'on') return (bri ? (bri+"%") : '') ]]]
+    layout: icon_label
+    show_label: true
+    show_name: true
+    state:
+      - styles:
+          card:
+            - box-shadow: '0px 0px 10px 3px #FC8607'
+          icon:
+            - color: '#FC8607'
+        value: 'on'
+    styles:
+      card:
+        - width: 86px
+        - height: 86px
+        - border-radius: 15px
+        - margin: 5px 5px 0px 0px
+        - padding: 0px 0px
+        - '--paper-card-background-color': rgba(40, 40, 40, 0.7)
+      grid:
+        - grid-template-rows: 42px auto 0px
+        - grid-template-columns: 42px auto
+      icon:
+        - width: 30px
+        - color: white
+      label:
+        - font-size: 12px
+        - font-weight: bold
+        - color: white
+      name:
+        - justify-self: start
+        - align-self: end
+        - padding: 9px 10px
+        - font-size: 12px
+        - font-weight: bold
+        - color: white
+    tap_action:
+      action: more-info

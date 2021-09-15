@@ -1,0 +1,221 @@
+views:
+  - title: Battery Info
+    path: battery
+    icon: mdi:battery
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: markdown
+            content: '### <center> Device Battery Info </center>'
+          - type: custom:flex-table-card
+            clickable: false
+            entities:
+              include:
+                - sensor.*_battery
+                - sensor.battery_status_*
+                - sensor.lumi_*_power
+            sort_by: state+
+            columns:
+              - data: friendly_name
+                name: Название
+                modify: (x+"").replace(/ Battery$/,"").replace(/ power$/,"")
+              - data: state
+                name: Заряд %
+                modify: 'isNaN(parseInt(x, 10)) ? 0 : parseInt(x, 10)'
+            css:
+              table+: 'padding-top: 2px;'
+              tbody tr:nth-child(even): 'background-color: #a2542f6;'
+              td.left: 'padding: 2px 2px 2px 2px'
+              th.left: 'padding: 0px 0px 2px 2px'
+      - type: entities
+        entities:
+          - entity: sensor.sonoff_a4800110d3_temperatur_sp_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_sp_v
+                name: Напряжение
+              - entity: sensor.sonoff_a4800110d3_temperatur_sp_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - entity: sensor.sonoff_a48001287c_temperatur_kuh_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_kuh_v
+                name: Напряжение
+              - entity: sensor.sonoff_a4800121c0_ds01_contact_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - entity: sensor.agara_t_temperatur_zal_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_zal_v
+                name: Напряжение
+              - entity: sensor.agara_t_temperatur_zal_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - entity: sensor.sonoff_ec9cac23_temperatur_vn_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_vn_v
+                name: Напряжение
+              - entity: sensor.sonoff_ec9cac23_temperatur_vn_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - entity: sensor.agara_luminance_kor_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_luminance_kor_v
+                name: Напряжение
+              - entity: sensor.agara_luminance_kor_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - entity: sensor.sonoff_a4800121c0_ds01_contact_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_contact_door_kor_v
+                name: Напряжение
+              - entity: sensor.sonoff_a4800121c0_ds01_contact_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - entity: sensor.agara_vibration_kor_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_vibration_door_kor_v
+                name: Напряжение
+              - entity: sensor.agara_vibration_kor_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - entity: sensor.sonoff_ds01_3439ab23_vn_contact_level_battery
+            type: custom:multiple-entity-row
+            show_state: false
+            entities:
+              - attribute: battery_type
+                name: Батарейка
+              - entity: sensor.level_batter_contact_door_vn_v
+                name: Напряжение
+              - entity: sensor.sonoff_ds01_3439ab23_vn_contact_level_battery
+                name: Заряд
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }
+          - type: divider
+          - entity: input_number.scale_minimal_battery
+            card_mod:
+              style: |
+                :host {
+                  --paper-item-icon-color:
+                    {% if states(config.entity)|int < states('input_number.scale_minimal_battery')|int %}
+                      var(--label-badge-red)
+                    {% elif states(config.entity)|int < states('input_number.scale_minimal_battery')|int + 10 %}
+                      var(--label-badge-yellow)
+                    {% else %}
+                      var(--label-badge-green)
+                    {% endif %};
+                  }

@@ -22,10 +22,11 @@
   - [Home Assistant core](https://www.home-assistant.io/installation/linux#install-home-assistant-core)
   - [HACS](https://hacs.xyz/)
 
+## Devices
 - **Hub Devices:**
   - Mi Smart Home Hub (ZNDMWG02LM, Zigbee 3.0/Bluetooth (BLE Mesh) 5.0/Wi-Fi 2.4GHz)
 
-- **Zigbee Devices:**
+- **Zigbee:**
   - Sonoff Temperature and Humidity Sensor (SNZB-02, CR2450)
   - Sonoff Wireless Door and Window Sensor (SNZB-04, CR2032)
   - Sonoff ZB MINI
@@ -33,11 +34,11 @@
   - Aqara Temperature and Humidity Sensor (WSDCGQ11LM, CR2032)
   - Xiaomi Mijia Smart Light Sensor (GZCGQ01LM, CR2450)
 
-- **Bluetooth Devices:**
+- **Bluetooth:**
   - Xiaomi Door Sensor2 (MCCGQ02HL, 5.1 BLE, CR2032)
   - Xiaomi Mijia Human body Sensor 2 (RTCQ02LM, 5.1 BLE, CR2450)
 
-- **WiFi Devices:**
+- **WiFi:**
   - Sonoff MINI 2 DIY WiFi
 
 ## Интеграции:

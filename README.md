@@ -39,9 +39,10 @@
 - **WiFi Devices:**
   - Sonoff MINI 2 DIY WiFi
 
+<details><summary>Интеграции:</summary>
+<p>
 
-- **Интеграции:**
-
+  
   * [HACS](https://hacs.xyz/)
   * [AirVisual Cloud API](https://www.home-assistant.io/integrations/airvisual)
   * [Alarmo](https://github.com/nielsfaber/alarmo)

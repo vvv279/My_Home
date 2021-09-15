@@ -20,6 +20,7 @@
 
   - [Ubuntu Linux 20.04.2 LTS](https://releases.ubuntu.com/20.04/)
   - [Home Assistant core](https://www.home-assistant.io/installation/linux#install-home-assistant-core)
+  - [HACS](https://hacs.xyz/)
 
 - **Hub Devices:**
   - Mi Smart Home Hub (ZNDMWG02LM, Zigbee 3.0/Bluetooth (BLE Mesh) 5.0/Wi-Fi 2.4GHz)
@@ -39,13 +40,12 @@
 - **WiFi Devices:**
   - Sonoff MINI 2 DIY WiFi
 
-<details><summary>Интеграции:</summary>
+## Интеграции:
+<details><summary>Home Assistant:</summary>
 <p>
 
-  
-  * [HACS](https://hacs.xyz/)
+  * [Zigbee Home Automation](https://www.home-assistant.io/integrations/zha/)
   * [AirVisual Cloud API](https://www.home-assistant.io/integrations/airvisual)
-  * [Alarmo](https://github.com/nielsfaber/alarmo)
   * [Google Cast](https://www.home-assistant.io/integrations/cast)
   * [Meteorologisk institutt (Met.no)](https://www.home-assistant.io/integrations/met)
   * [MQTT](https://www.home-assistant.io/integrations/mqtt)
@@ -53,23 +53,47 @@
   * [OpenWeatherMap](https://www.home-assistant.io/integrations/openweathermap)
   * [Plex Media Server](https://www.home-assistant.io/integrations/plex)
   * [Samsung Smart TV](https://www.home-assistant.io/integrations/samsungtv)
-  * [scheduler-component](https://github.com/nielsfaber/scheduler-component)
   * [Speedtest.net](https://www.home-assistant.io/integrations/speedtestdotnet)
-  * [StartTime](https://github.com/AlexxIT/StartTime)
   * [UPnP/IGD](https://www.home-assistant.io/integrations/upnp)
-  * [Xiaomi Gateway 3](https://github.com/AlexxIT/XiaomiGateway3)
-  * [YandexStation](https://github.com/AlexxIT/YandexStation)
   * [Zigbee Home Automation](https://www.home-assistant.io/integrations/zha)
-  * [hass-lkcomu-interrao (ЕЛК ЖКХ «Интер РАО»)](https://github.com/alryaz/hass-lkcomu-interrao)
   * [Local IP Address](https://www.home-assistant.io/integrations/local_ip)
   * [Mobile App](https://www.home-assistant.io/integrations/mobile_app)
   * [Shopping List](https://www.home-assistant.io/integrations/shopping_list)
   * [Certificate Expiry](https://www.home-assistant.io/integrations/cert_expiry)
+  
+  
+
+</p>
+</details>
+  
+
+<details><summary>HACS:</summary>
+<p>
+
+
+  * [Xiaomi Gateway 3](https://github.com/AlexxIT/XiaomiGateway3)
+  * [SonoffLAN](https://github.com/AlexxIT/SonoffLAN)
+  * [YandexStation](https://github.com/AlexxIT/YandexStation)
+  
+  * [StartTime](https://github.com/AlexxIT/StartTime)
+  * [MorphNumbers](https://github.com/AlexxIT/MorphNumbers)
+  * [PythonScriptsPro](https://github.com/AlexxIT/PythonScriptsPro)
+  
+  * [Alarmo](https://github.com/nielsfaber/alarmo)
+
+  * [scheduler-component](https://github.com/nielsfaber/scheduler-component)
+
+
+
+
+
+  * [hass-lkcomu-interrao (ЕЛК ЖКХ «Интер РАО»)](https://github.com/alryaz/hass-lkcomu-interrao)
+
   * [Scheduler-component](https://github.com/nielsfaber/scheduler-component)
   * [Sensor.yandex_maps](https://github.com/custom-components/sensor.yandex_maps)
   * [irrigation_unlimited](https://github.com/rgc99/irrigation_unlimited)
   * [yandex_smart_home](https://github.com/dmitry-k/yandex_smart_home)
-  * [SonoffLAN](https://github.com/AlexxIT/SonoffLAN)
+
 
 
   * [weather-card](https://github.com/bramkragten/weather-card)
@@ -90,13 +114,13 @@
   * [mini-humidifier](https://github.com/artem-sedykh/mini-humidifier)
   * [lovelace-multiple-entity-row](https://github.com/benct/lovelace-multiple-entity-row)
   * [logbook-card](https://github.com/royto/logbook-card)
-  * [PythonScriptsPro](https://github.com/AlexxIT/PythonScriptsPro)
+
   * [home-assistant-sun-card](https://github.com/AitorDB/home-assistant-sun-card)
   * [zha-network-card](https://github.com/dmulcahey/zha-network-card)
   * [apexcharts-card](https://github.com/RomRider/apexcharts-card#yaxis-options-multi-y-axis)
   * [lovelace-fold-entity-row](https://github.com/thomasloven/lovelace-fold-entity-row)
   * [lovelace-layout-card](https://github.com/thomasloven/lovelace-layout-card)
-  * [MorphNumbers](https://github.com/AlexxIT/MorphNumbers)
+
   * [hass-yandex-music-browser](https://github.com/alryaz/hass-yandex-music-browser)
   * [hass-moscow-pgu](https://github.com/alryaz/hass-moscow-pgu)
   * [SamsungTV Tizen](https://github.com/jaruba/ha-samsungtv-tizen)
@@ -109,8 +133,19 @@
   * [slider-button-card](https://github.com/mattieha/slider-button-card)
 
 
+  
+</p>
+</details>
+  
 
-
+  
+  
+  
+<details><summary>HACS темы:</summary>
+<p>
+  
+</p>
+</details>
 
 
 

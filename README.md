@@ -148,9 +148,47 @@
 </p>
 </details>
 
+## Установка:
+<details><summary>Ubuntu Linux 20.04.2 LTS:</summary>
+<p>
+
+
+
+  
+  
+ </p>
+</details> 
 
 
 
 
+<details><summary>Home Assistant:</summary>
+<p>
 
+
+
+  
+  
+ </p>
+</details> 
+  
+  
+  
+ <details><summary>HACS:</summary>
+<p> 
+  
+  
+ </p>
+</details> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 

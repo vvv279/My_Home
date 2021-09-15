@@ -173,8 +173,157 @@ sudo apt-get update
 sudo apt-get upgrade -y
 ```
 2. После обновления системы устанавливаем необходимые компоненты и зависимости. 
+```shell
+sudo apt-get install python3 python3-dev python3-venv python3-pip libffi-dev libssl-dev autoconf build-essential
+```
+2.1 Соглошаемся
+```shell
+Y
+``` 
   
+3. Создаем нового системного пользователя с домашней папкой для запуска и работы ядра Home Assistant, назовем его homeassistant. Добавим его в группу dialout для взаимодействия с устройствами Z-Wave и ZigBee
+```shell
+sudo useradd -rm homeassistant -G dialout
+```   
+  
+4.  Далее создаем папку для ядра Home Assistant и устанавливаем пользователя homeassistant для неё владельцем 
+```shell
+cd /srv
+```   
+```shell
+sudo mkdir homeassistant
+```  
+```shell
+sudo chown homeassistant:homeassistant /srv/homeassistant
+```   
+  
+5. Теперь создаем виртуальное окружение для ядра Home Assistant, делаем это для учетной записи homeassistant 
+```shell
+sudo -u homeassistant -H -s
+```   
+```shell
+cd /srv/homeassistant
+```  
+```shell
+python3 -m venv .
+```  
+```shell
+source bin/activate
+```   
+  
+6.  После активации виртуальной среды выполняем установку необходимого пакета Python
+```shell
+python3 -m pip install wheel
+```   
+  
+7. По завершении установки пакета Python приступаем к установке Home Assistant
+```shell
+pip3 install homeassistant
+```   
+8. Запускаем наш Home Assistant в первый раз. При первом запуске в домашнем каталоге пользователя homeassistant (/home/homeassistant) будет создана папка .homeassistant, в которой будут находится конфигурационные файлы системы
+ ```shell
+hass
+```   
 
+9. Первый запуск может занимать 5-10 МИНУТ, после чего проверяем доступность установленной системы через браузер http://192.168.Х.ХХ:8123 
+
+10. Прерываем работу запущенной системы
+```shell
+Ctrl+C
+```   
+
+10.1 Выходим из учетной записи пользователя homeassistant   
+```shell
+exit
+```    
+  
+11. Создаем файл для запуска сервиса при старте системы
+```shell
+sudo nano /etc/systemd/system/homeassistant@homeassistant.service
+```   
+  
+11.1 Заполняем его
+```yaml
+[Unit]
+Description=Home Assistant
+After=network-online.target
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/.homeassistant
+ExecStart=/srv/homeassistant/bin/hass -c "/home/%i/.homeassistant"
+
+[Install]
+WantedBy=multi-user.target
+``` 
+  
+11.2 Выходим
+```shell
+Ctrl+X
+Y
+Enter
+```    
+  
+12. Запускаем сервис
+```shell
+sudo systemctl --system daemon-reload
+``` 
+```shell
+sudo systemctl enable homeassistant@homeassistant.service
+``` 
+```shell
+sudo systemctl start homeassistant@homeassistant.service
+``` 
+  
+13. Проверяем работу сервиса
+```shell
+sudo systemctl status homeassistant@homeassistant.service
+``` 
+  
+13.1 Проверяем доступность установленной системы через браузер http://192.168.Х.ХХ:8123
+
+13.2 Выходим
+```shell
+Ctrl+X
+```     
+  
+14. Перезагружаем систему
+```shell
+su reboot
+```  
+  
+<details><summary>Обновление Home Assistant:</summary>
+<p>
+  
+1. Вводим
+```shell
+sudo -u homeassistant -H -s
+``` 
+```shell
+source /srv/homeassistant/bin/activate
+``` 
+```shell
+pip3 install --upgrade homeassistant
+```   
+```shell
+exit
+```   
+
+2. После обновления выполняем перезапуск службы
+```shell
+sudo systemctl restart homeassistant@homeassistant.service
+```
+2.1 Проверяем доступность установленной системы через браузер http://192.168.Х.ХХ:8123
+    
+3. Перезагружаем систему
+```shell
+su reboot
+```
+</p>
+</details>
+  
+  
+  
   
   
   
@@ -217,18 +366,10 @@ INFO: Installation complete.
 ```shell
 su reboot
 ```
-
   
 </p>
 </details>   
   
-  
-  
-  
-
-
-
-
 
 
 <details><summary>Получаем сертификат HTTPS:</summary>

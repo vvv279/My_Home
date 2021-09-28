@@ -165,7 +165,7 @@
 <details><summary>Home Assistant:</summary>
 <p>
 
-1. Обновляем систему до актуального состояния
+1. Обновляем систему "Ubuntu Server" до актуального состояния
 ```shell
 sudo apt-get update
 ```
@@ -199,7 +199,7 @@ sudo chown homeassistant:homeassistant /srv/homeassistant
   
 5. Теперь создаем виртуальное окружение для ядра Home Assistant, делаем это для учетной записи homeassistant 
 ```shell
-sudo -u homeassistant -H -s
+sudo -u homeassistant -H -s 
 ```   
 ```shell
 cd /srv/homeassistant

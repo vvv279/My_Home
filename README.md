@@ -133,7 +133,7 @@
   * [simple-weather-card](https://github.com/kalkih/simple-weather-card)
   * [slider-button-card](https://github.com/mattieha/slider-button-card)
   * [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod)
-
+  * [home-assistant-variables](https://github.com/snarky-snark/home-assistant-variables)
   
 </p>
 </details>

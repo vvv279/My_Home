@@ -134,6 +134,8 @@
   * [slider-button-card](https://github.com/mattieha/slider-button-card)
   * [lovelace-card-mod](https://github.com/thomasloven/lovelace-card-mod)
   * [home-assistant-variables](https://github.com/snarky-snark/home-assistant-variables)
+  * [bar-card](https://github.com/custom-cards/bar-card)
+  
   
 </p>
 </details>
